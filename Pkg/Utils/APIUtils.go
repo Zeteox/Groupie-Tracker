@@ -3,41 +3,69 @@ package Utils
 import (
 	"GroupieTracker/Pkg/DataStruct"
 	"encoding/json"
-	"io/ioutil"
-	"log"
 	"net/http"
-	"time"
+	"strconv"
 )
 
-func GetAllGroups() []DataStruct.Group {
-	url := "https://groupietrackers.herokuapp.com/api/artists"
-
-	spaceClient := http.Client{ // client to make a request to the api
-		Timeout: time.Second * 2, // Timeout after 2 seconds
-	}
-	req1, err := http.NewRequest(http.MethodGet, url, nil) // creation of the request
+func GetArtists() ([]DataStruct.Artist, error) {
+	resp, err := http.Get("https://groupietrackers.herokuapp.com/api/artists")
 	if err != nil {
-		log.Fatal(err)
+		return nil, err
+	}
+	defer resp.Body.Close()
+
+	var Artists []DataStruct.Artist
+	if err := json.NewDecoder(resp.Body).Decode(&Artists); err != nil {
+		return nil, err
 	}
 
-	res, getErr := spaceClient.Do(req1)
-	if getErr != nil {
-		log.Fatal(getErr)
-	}
-	if res.Body != nil {
-		defer res.Body.Close()
+	for x := 0; x < len(Artists); x++ {
+		Artists[x].AllLocations, _ = GetLocationsByID(Artists[x].Id)
+		Artists[x].AllDates, _ = GetDatesByID(Artists[x].Id)
+		Artists[x].AllRelations, _ = GetRelationsByID(Artists[x].Id)
 	}
 
-	data, readErr := ioutil.ReadAll(res.Body)
-	if readErr != nil {
-		log.Fatal(readErr)
-	}
+	return Artists, nil
+}
 
-	var Groups []DataStruct.Group
-	jsonErr := json.Unmarshal(data, &Groups) // put all data into the data struct
-	if jsonErr != nil {
-		log.Fatal(jsonErr)
+func GetLocationsByID(id int) (DataStruct.Locations, error) {
+	resp, err := http.Get("https://groupietrackers.herokuapp.com/api/locations/" + strconv.Itoa(id))
+	if err != nil {
+		return DataStruct.Locations{}, err
 	}
+	defer resp.Body.Close()
 
-	return Groups
+	var Locations DataStruct.Locations
+	if err := json.NewDecoder(resp.Body).Decode(&Locations); err != nil {
+		return DataStruct.Locations{}, err
+	}
+	return Locations, nil
+}
+
+func GetRelationsByID(id int) (DataStruct.Relations, error) {
+	resp, err := http.Get("https://groupietrackers.herokuapp.com/api/relation/" + strconv.Itoa(id))
+	if err != nil {
+		return DataStruct.Relations{}, err
+	}
+	defer resp.Body.Close()
+
+	var Relations DataStruct.Relations
+	if err := json.NewDecoder(resp.Body).Decode(&Relations); err != nil {
+		return DataStruct.Relations{}, err
+	}
+	return Relations, nil
+}
+
+func GetDatesByID(id int) (DataStruct.Dates, error) {
+	resp, err := http.Get("https://groupietrackers.herokuapp.com/api/dates/" + strconv.Itoa(id))
+	if err != nil {
+		return DataStruct.Dates{}, err
+	}
+	defer resp.Body.Close()
+
+	var Dates DataStruct.Dates
+	if err := json.NewDecoder(resp.Body).Decode(&Dates); err != nil {
+		return DataStruct.Dates{}, err
+	}
+	return Dates, nil
 }

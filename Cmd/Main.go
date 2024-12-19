@@ -1,11 +1,7 @@
 package main
 
-import (
-	"GroupieTracker/Pkg/Utils"
-	"fmt"
-)
+import internal "GroupieTracker/Internal/Server"
 
 func main() {
-	fmt.Println(Utils.GetAllGroups()[0])
-	//internal.CreateAndListenServer(8080)
+	internal.CreateAndListenServer(8080)
 }
