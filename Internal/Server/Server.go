@@ -10,6 +10,7 @@ import (
 func CreateAndListenServer(port int) {
 	//Creation of routes for all pages
 	http.HandleFunc("/", Handlers.HandlerIndexPage)
+	http.HandleFunc("/Filter", Handlers.HandlerFilterPage)
 
 	//Creation of route for statics files
 	fs := http.FileServer(http.Dir("./Frontend/Static"))
