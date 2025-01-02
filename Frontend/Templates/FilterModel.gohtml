@@ -6,11 +6,18 @@
 </head>
 
 <body>
-    <form method="post" action="/">
+    <form method="post" action="/Filter">
+        <input type="radio" name="MembersNumber" content="1">1
+        <input type="radio" name="MembersNumber" content="2">2
+        <input type="radio" name="MembersNumber" content="3">3
+        <input type="radio" name="MembersNumber" content="4">4
+        <input type="radio" name="MembersNumber" content="5">5
+        <input type="radio" name="MembersNumber" content="6">6
+        <input type="radio" name="MembersNumber" content="7">7
+        <br>
         <button type="submit">Filter</button>
     </form>
-
-{{with $n := index . 0}}{{$n}}{{end}}
+{{.}}
 </body>
 
 </html>
