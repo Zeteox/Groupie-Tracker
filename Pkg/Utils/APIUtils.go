@@ -19,12 +19,6 @@ func GetArtists() ([]DataStruct.Artist, error) {
 		return nil, err
 	}
 
-	for x := 0; x < len(Artists); x++ {
-		Artists[x].AllLocations, _ = GetLocationsByID(Artists[x].Id)
-		Artists[x].AllDates, _ = GetDatesByID(Artists[x].Id)
-		Artists[x].AllRelations, _ = GetRelationsByID(Artists[x].Id)
-	}
-
 	return Artists, nil
 }
 
