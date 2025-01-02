@@ -3,14 +3,91 @@
 <head>
     <meta charset="UTF-8">
     <title>Groupify</title>
+    <script>
+        function Range() {
+            const slider = document.getElementById("MembersNumber");
+            const val = slider.value;
+            if (val>0) {
+                document.getElementById("LabelMembers").innerHTML = val
+            } else {
+                document.getElementById("LabelMembers").innerHTML = "All"
+            }
+        }
+    </script>
 </head>
 
 <body>
-    <form method="post" action="/">
-        <button type="submit">Filter</button>
+    <form method="post">
+        <div>
+            <h3>CAREER</h3>
+            <label>
+                <input type="checkbox" value="1" name="career:1970-1979">
+                1970-1979
+            </label> <br>
+            <label>
+                <input type="checkbox" value="1" name="career:1980-1989">
+                1980-1989
+            </label> <br>
+            <label>
+                <input type="checkbox" value="1" name="career:1990-1999">
+                1990-1999
+            </label> <br>
+            <label>
+                <input type="checkbox" value="1" name="career:2000-2009">
+                2000-2009
+            </label> <br>
+            <label>
+                <input type="checkbox" value="1" name="career:2010-2019">
+                2010-2019
+            </label> <br>
+            <label>
+                <input type="checkbox" value="1" name="career:2020-2025">
+                2020-2025
+            </label> <br>
+        </div>
+        <div>
+            <h3>ALBUM</h3>
+            <label>
+                <input type="checkbox" value="1" name="album:1970-1979">
+                1970-1979
+            </label> <br>
+            <label>
+                <input type="checkbox" value="1" name="album:1980-1989">
+                1980-1989
+            </label> <br>
+            <label>
+                <input type="checkbox" value="1" name="album:1990-1999">
+                1990-1999
+            </label> <br>
+            <label>
+                <input type="checkbox" value="1" name="album:2000-2009">
+                2000-2009
+            </label> <br>
+            <label>
+                <input type="checkbox" value="1" name="album:2010-2019">
+                2010-2019
+            </label> <br>
+            <label>
+                <input type="checkbox" value="1" name="album:2020-2025">
+                2020-2025
+            </label> <br>
+        </div>
+        <div>
+            <h3>MEMBERS</h3>
+            <input type="range" min="0" max="6" value="0" step="1" name="MembersNumber" id="MembersNumber" oninput="Range()">
+            <label for="MembersNumber" id="LabelMembers">All</label>
+
+        </div>
+        <div>
+            <button type="submit">Filter</button>
+            <input type="reset" value="Reset">
+        </div>
     </form>
 
-{{with $n := index . 0}}{{$n}}{{end}}
+{{range .}}
+    <p>{{.}}</p>
+{{end}}
+
 </body>
 
 </html>

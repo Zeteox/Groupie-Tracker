@@ -1,10 +1,12 @@
 package Handlers
 
 import (
+	"GroupieTracker/Pkg/DataStruct"
 	"GroupieTracker/Pkg/Utils"
 	"fmt"
 	"html/template"
 	"net/http"
+	"strconv"
 )
 
 func HandlerFilterPage(w http.ResponseWriter, r *http.Request) {
@@ -23,6 +25,24 @@ func HandlerFilterPage(w http.ResponseWriter, r *http.Request) {
 	}
 
 	data := allArtists
+
+	if r.Method == http.MethodPost {
+
+		numberOfMember, err := strconv.Atoi(r.FormValue("MembersNumber"))
+		if err != nil {
+			w.WriteHeader(http.StatusInternalServerError)
+		}
+
+		if numberOfMember >= 1 {
+			var tmpData []DataStruct.Artist
+			for x := 0; x < len(data); x++ {
+				if len(data[x].Members) == numberOfMember {
+					tmpData = append(tmpData, data[x])
+				}
+			}
+			data = tmpData
+		}
+	}
 
 	templ.Execute(w, data)
 }
