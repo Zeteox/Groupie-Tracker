@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Groupify</title>
+    <script>
+        document.getElementById("MembersNumber").value = {{.FormData.MemberNumber}}
+        function Range() {
+            const slider = document.getElementById("MembersNumber");
+            const val = slider.value;
+            if (val>0) {
+                document.getElementById("LabelMembers").innerHTML = val
+            } else {
+                document.getElementById("LabelMembers").innerHTML = "All"
+            }
+        }
+    </script>
+</head>
+
+<body>
+    <form method="post">
+        <div>
+            <h3>CAREER</h3>
+            {{range $index, $item := .FormData.CareerYears}}
+                {{if eq $item ""}}
+                    <label>
+                        <input type="checkbox" value="1" name="career:{{GetCareerOrAlbumYears $index}}">
+                        {{GetCareerOrAlbumYears $index}}
+                    </label>
+                {{else}}
+                    <label>
+                        <input type="checkbox" value="1" name="career:{{GetCareerOrAlbumYears $index}}" checked>
+                        {{GetCareerOrAlbumYears $index}}
+                    </label>
+                {{end}}
+                <br>
+            {{end}}
+
+        </div>
+        <div>
+            <h3>ALBUM</h3>
+            {{range $index, $item := .FormData.AlbumYears}}
+                {{if eq $item ""}}
+                    <label>
+                        <input type="checkbox" value="1" name="album:{{GetCareerOrAlbumYears $index}}">
+                        {{GetCareerOrAlbumYears $index}}
+                    </label>
+                {{else}}
+                    <label>
+                        <input type="checkbox" value="1" name="album:{{GetCareerOrAlbumYears $index}}" checked>
+                        {{GetCareerOrAlbumYears $index}}
+                    </label>
+                {{end}}
+                <br>
+            {{end}}
+        </div>
+        <div>
+            <h3>MEMBERS</h3>
+            <input type="range" min="0" max="6" value="{{.FormData.MemberNumber}}" step="1" name="MembersNumber" id="MembersNumber" oninput="Range()">
+            <label for="MembersNumber" id="LabelMembers">
+                {{if eq .FormData.MemberNumber "0"}}
+                    All
+                {{else}}
+                    {{.FormData.MemberNumber}}
+                {{end}}
+            </label>
+        </div>
+        <div>
+            <button type="submit">Filter</button>
+        </div>
+    </form>
+
+{{range .Artists}}
+    <img src="{{.Image}}" alt="{{.Name}}.png"/>
+{{end}}
+
+</body>
+
+</html>

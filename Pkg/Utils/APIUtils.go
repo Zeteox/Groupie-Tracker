@@ -19,13 +19,26 @@ func GetArtists() ([]DataStruct.Artist, error) {
 		return nil, err
 	}
 
-	for x := 0; x < len(Artists); x++ {
-		Artists[x].AllLocations, _ = GetLocationsByID(Artists[x].Id)
-		Artists[x].AllDates, _ = GetDatesByID(Artists[x].Id)
-		Artists[x].AllRelations, _ = GetRelationsByID(Artists[x].Id)
+	return Artists, nil
+}
+
+func GetArtistsById(id int) (DataStruct.Artist, error) {
+	resp, err := http.Get("https://groupietrackers.herokuapp.com/api/artists/" + strconv.Itoa(id))
+	if err != nil {
+		return DataStruct.Artist{}, err
+	}
+	defer resp.Body.Close()
+
+	var Artist DataStruct.Artist
+	if err := json.NewDecoder(resp.Body).Decode(&Artist); err != nil {
+		return DataStruct.Artist{}, err
 	}
 
-	return Artists, nil
+	Artist.AllLocations, _ = GetLocationsByID(Artist.Id)
+	Artist.AllDates, _ = GetDatesByID(Artist.Id)
+	Artist.AllRelations, _ = GetRelationsByID(Artist.Id)
+
+	return Artist, nil
 }
 
 func GetLocationsByID(id int) (DataStruct.Locations, error) {
