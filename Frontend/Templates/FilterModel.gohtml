@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <title>Groupify</title>
     <script>
+        document.getElementById("MembersNumber").value = {{.FormData.MemberNumber}}
         function Range() {
             const slider = document.getElementById("MembersNumber");
             const val = slider.value;
@@ -20,72 +21,57 @@
     <form method="post">
         <div>
             <h3>CAREER</h3>
-            <label>
-                <input type="checkbox" value="1" name="career:1970-1979">
-                1970-1979
-            </label> <br>
-            <label>
-                <input type="checkbox" value="1" name="career:1980-1989">
-                1980-1989
-            </label> <br>
-            <label>
-                <input type="checkbox" value="1" name="career:1990-1999">
-                1990-1999
-            </label> <br>
-            <label>
-                <input type="checkbox" value="1" name="career:2000-2009">
-                2000-2009
-            </label> <br>
-            <label>
-                <input type="checkbox" value="1" name="career:2010-2019">
-                2010-2019
-            </label> <br>
-            <label>
-                <input type="checkbox" value="1" name="career:2020-2025">
-                2020-2025
-            </label> <br>
+            {{range $index, $item := .FormData.CareerYears}}
+                {{if eq $item ""}}
+                    <label>
+                        <input type="checkbox" value="1" name="career:{{GetCareerOrAlbumYears $index}}">
+                        {{GetCareerOrAlbumYears $index}}
+                    </label>
+                {{else}}
+                    <label>
+                        <input type="checkbox" value="1" name="career:{{GetCareerOrAlbumYears $index}}" checked>
+                        {{GetCareerOrAlbumYears $index}}
+                    </label>
+                {{end}}
+                <br>
+            {{end}}
+
         </div>
         <div>
             <h3>ALBUM</h3>
-            <label>
-                <input type="checkbox" value="1" name="album:1970-1979">
-                1970-1979
-            </label> <br>
-            <label>
-                <input type="checkbox" value="1" name="album:1980-1989">
-                1980-1989
-            </label> <br>
-            <label>
-                <input type="checkbox" value="1" name="album:1990-1999">
-                1990-1999
-            </label> <br>
-            <label>
-                <input type="checkbox" value="1" name="album:2000-2009">
-                2000-2009
-            </label> <br>
-            <label>
-                <input type="checkbox" value="1" name="album:2010-2019">
-                2010-2019
-            </label> <br>
-            <label>
-                <input type="checkbox" value="1" name="album:2020-2025">
-                2020-2025
-            </label> <br>
+            {{range $index, $item := .FormData.AlbumYears}}
+                {{if eq $item ""}}
+                    <label>
+                        <input type="checkbox" value="1" name="album:{{GetCareerOrAlbumYears $index}}">
+                        {{GetCareerOrAlbumYears $index}}
+                    </label>
+                {{else}}
+                    <label>
+                        <input type="checkbox" value="1" name="album:{{GetCareerOrAlbumYears $index}}" checked>
+                        {{GetCareerOrAlbumYears $index}}
+                    </label>
+                {{end}}
+                <br>
+            {{end}}
         </div>
         <div>
             <h3>MEMBERS</h3>
-            <input type="range" min="0" max="6" value="0" step="1" name="MembersNumber" id="MembersNumber" oninput="Range()">
-            <label for="MembersNumber" id="LabelMembers">All</label>
-
+            <input type="range" min="0" max="6" value="{{.FormData.MemberNumber}}" step="1" name="MembersNumber" id="MembersNumber" oninput="Range()">
+            <label for="MembersNumber" id="LabelMembers">
+                {{if eq .FormData.MemberNumber "0"}}
+                    All
+                {{else}}
+                    {{.FormData.MemberNumber}}
+                {{end}}
+            </label>
         </div>
         <div>
             <button type="submit">Filter</button>
-            <input type="reset" value="Reset">
         </div>
     </form>
 
-{{range .}}
-    <p>{{.}}</p>
+{{range .Artists}}
+    <img src="{{.Image}}" alt="{{.Name}}.png"/>
 {{end}}
 
 </body>

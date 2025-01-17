@@ -26,3 +26,14 @@ type Dates struct {
 	Id    int      `json:"id"`
 	Dates []string `json:"dates"`
 }
+
+type Form struct {
+	CareerYears  []string
+	AlbumYears   []string
+	MemberNumber string
+}
+
+type ArtistsAndForm struct {
+	Artists  []Artist
+	FormData Form
+}
