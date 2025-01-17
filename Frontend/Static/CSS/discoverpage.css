@@ -1,0 +1,38 @@
+@font-face {
+    font-family: Montserrat;
+    src: url("https://fonts.googleapis.com/css?family=Montserrat");
+}
+@font-face {
+    font-family: Buster;
+    src: url("https://fonts.cdnfonts.com/css/buster");
+}
+.home-button {
+    position: absolute;
+    top: 5px;
+    right: 10px;
+    background-color: white;
+}
+
+.logo {
+   position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 70px;
+
+}
+.banner {
+    position: absolute;
+    background-position: top center;
+}
+
+label.search-button {
+    font-family: Montserrat, serif;
+    font-size: 11px;
+
+}
+.search-button {
+    top: 0;
+    left: 0;
+    background-color: white;
+}
