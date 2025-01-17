@@ -18,5 +18,5 @@ func CreateAndListenServer(port int) {
 
 	//Creating a server and listening on the given port
 	fmt.Println("\u001B[36m[INFO]\u001B[0m Listening on port " + strconv.Itoa(port) + " (http://localhost:" + strconv.Itoa(port) + ")")
-	http.ListenAndServe("localhost:"+strconv.Itoa(port), nil)
+	http.ListenAndServe("0.0.0.0:"+strconv.Itoa(port), nil)
 }

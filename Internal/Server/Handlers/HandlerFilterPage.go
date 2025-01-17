@@ -91,5 +91,8 @@ func HandlerFilterPage(w http.ResponseWriter, r *http.Request) {
 		}
 	}
 
-	templ.Execute(w, data)
+	err = templ.Execute(w, data)
+	if err != nil {
+		return
+	}
 }
