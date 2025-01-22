@@ -28,9 +28,10 @@ type Dates struct {
 }
 
 type Form struct {
-	CareerYears  []string
-	AlbumYears   []string
-	MemberNumber string
+	SearchbarContent string
+	CareerYears      []string
+	AlbumYears       []string
+	MemberNumber     string
 }
 
 type ArtistsAndForm struct {
