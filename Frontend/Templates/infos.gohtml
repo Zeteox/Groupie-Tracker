@@ -18,15 +18,19 @@
                 <img class="albumCover" src="{{.Image}}" alt="Image album">
                 <div class="description">
                     <h1>{{.Name}}</h1>
-                    <p>Members : {{range .Members}}
+                    <p class="bold"> Members : </p>
+                    <p>{{range .Members}}
                         {{.}}<br>
                     {{end}}</p>
                     <p>Creation date : {{.CreationDate}}</p>
                     <p>First album : {{.FirstAlbum}}</p>
 
                     <h1>Concerts</h1>
-                    <p>{{range .AllRelations.GroupLocations}}
-                            {{.}}<br>
+                    <p>{{range .AllLocations.GroupLocations}}
+                            {{.}}
+                            {{range .AllDates.GroupLocations}}
+                                {{.}}<br>
+                            {{end}}
                     {{end}}}</p>
                 </div>
     </div>

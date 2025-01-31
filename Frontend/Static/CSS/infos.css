@@ -33,6 +33,10 @@
     margin-left: 900px;
 }
 
+.bold{
+    font-weight: bold;
+}
+
 .description {
     position: absolute;
     margin-left: 300px;
