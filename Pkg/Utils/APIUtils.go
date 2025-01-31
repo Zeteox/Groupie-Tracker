@@ -52,6 +52,26 @@ func GetLocationsByID(id int) (DataStruct.Locations, error) {
 	if err := json.NewDecoder(resp.Body).Decode(&Locations); err != nil {
 		return DataStruct.Locations{}, err
 	}
+
+	m := make(map[string][]string)
+
+	for _, elems := range Locations.GroupLocations {
+		for index, letters := range elems {
+			if letters == '-' {
+				index += 1
+				if len(m[elems[index:]]) != 0 {
+					m[elems[index:]] = append(m[elems[index:]], elems[:index-1])
+				} else {
+					m[elems[index:]] = []string{}
+					m[elems[index:]] = append(m[elems[index:]], elems[:index-1])
+				}
+				break
+			}
+		}
+	}
+
+	Locations.LocationsMap = m
+
 	return Locations, nil
 }
 
