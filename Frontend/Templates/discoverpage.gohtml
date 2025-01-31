@@ -34,9 +34,7 @@
 </head>
 
 <body class="background">
-        <form action="/">
-            <button type="submit" class="home-button">Home</button>
-        </form>
+           <a href="/"> <button type="submit" class="home-button">Home</button></a>
     <img src="/Static/Images/Groupify_blanc.png"
          class="logo" alt="White record player">
 
@@ -110,12 +108,11 @@
                 <select name="country">
                     <option>Select a Country</option>
                     <option>France</option>
-                    <option>oui</option>
-                    <option>non</option>
+                    <option>Yes</option>
+                    <option>No</option>
                 </select>
             </label>
-            <br>
-            <br>
+
             <div>
                 <button type="submit">Filter</button>
             </div>
@@ -123,7 +120,7 @@
         </form>
 
         {{range .Artists}}
-            <a href="/Infos"><img src="{{.Image}}" alt="{{.Name}}.png"/></a>
+            <a href="/Infos?Id"><img src="{{.Image}}" alt="{{.Name}}.png"/></a>
         {{end}}
 
 </body>
