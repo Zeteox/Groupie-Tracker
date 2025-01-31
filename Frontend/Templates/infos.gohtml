@@ -2,12 +2,36 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="Static/CSS/homepage.css">
-    <title>Groupify</title>
+    <link rel="stylesheet" href="Static/CSS/infos.css">
+    <title>Who's that band ?</title>
 </head>
-<h1>Test</h1>
-<body class="img">
-{{with $n := index . 0}}{{$n}}{{end}}
-</body>
+<body class="background">
+<form action="/">
+    <button type="submit" class="homeButton">Home</button>
+</form>
+    <div class="banner">
+        <img class="logo" src="../Static/Images/Groupify_blanc.png" alt="Logo blanc">
+        <br><br><br>
+    </div>
+    <div class="content">
 
+                <img class="albumCover" src="{{.Image}}" alt="Image album">
+                <div class="description">
+                    <h1>{{.Name}}</h1>
+                    <p>Members : {{range .Members}}
+                        {{.}}<br>
+                    {{end}}</p>
+                    <p>Creation date : {{.CreationDate}}</p>
+                    <p>First album : {{.FirstAlbum}}</p>
+
+                    <h1>Concerts</h1>
+                    <p>{{range .AllRelations.GroupLocations}}
+                            {{.}}<br>
+                    {{end}}}</p>
+                </div>
+    </div>
+</body>
+<footer>
+    <p>By : Loïc Delprat, Elisabeth Robl and Melisa Mckenzie</p>
+</footer>
 </html>
