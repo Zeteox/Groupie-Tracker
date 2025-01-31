@@ -33,22 +33,19 @@
     </script>
 </head>
 
-<body class="background">
-
-    <a href="/"><button type="submit" class="home-button">Home</button></a>
-
-    <img src="/Static/Images/Groupify_blanc.png"
-         class="logo" alt="White record player">
+<body>
+<div class="background">
+    <a href="/"><button class="home-button">Home</button></a>
+    <img src="/Static/Images/Groupify_blanc.png" class="logo" alt="White record player">
+</div>
 
     <form id="FiltersForm" method="post">
-        <button class="search-button">Search</button>
         <input type="text" onkeyup="myFunction()"
                placeholder="Discover..."
                value="{{.FormData.SearchbarContent}}"
                name="Searchbar"
                autocomplete="off"
-               id="searchBar"
-               class="search-input">
+               id="searchBar">
         <ul id="groups">
             {{range .Artists}}
                 <li><a href="/Infos?Id={{.Id}}">{{.Name}} - Group</a></li>
@@ -59,7 +56,7 @@
             {{end}}
         </ul>
 
-            <div>
+            <div class="career-filter">
                 <h3>CAREER</h3>
                 {{range $index, $item := .FormData.CareerYears}}
                     {{if eq $item ""}}
@@ -77,7 +74,7 @@
                 {{end}}
 
             </div>
-            <div>
+            <div class="album-filter">
                 <h3>ALBUM</h3>
                 {{range $index, $item := .FormData.AlbumYears}}
                     {{if eq $item ""}}
@@ -94,7 +91,7 @@
                     <br>
                 {{end}}
             </div>
-            <div>
+            <div class="member-filter">
                 <h3>MEMBERS</h3>
                 <input type="range" min="0" max="6" value="{{.FormData.MemberNumber}}" step="1" name="MembersNumber" id="MembersNumber" oninput="Range()">
                 <label for="MembersNumber" id="LabelMembers">
@@ -105,25 +102,28 @@
                     {{end}}
                 </label>
             </div>
-            <label>
-                <h3>Country</h3>
-                <select name="country">
+
+            <div class="concert-location">
+                <label>
+                    <h3>COUNTRY</h3>
+                    <select name="country">
                     <option>Select a Country</option>
                     <option>France</option>
                     <option>Yes</option>
                     <option>No</option>
-                </select>
-            </label>
+                    </select>
+                </label>
+            </div>
 
-            <div>
+            <div class="filter-button">
                 <button type="submit">Filter</button>
             </div>
 
         </form>
-
+    <div class="images">
         {{range .Artists}}
-            <a href="/Infos?Id="><img src="{{.Image}}" alt="{{.Name}}.png"/></a>
+            <a href="/Infos?Id={{.Id}}"><img src="{{.Image}}" alt="{{.Name}}.png"/></a>
         {{end}}
-
+    </div>
 </body>
 </html>
