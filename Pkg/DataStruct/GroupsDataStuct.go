@@ -15,6 +15,7 @@ type Artist struct {
 type Locations struct {
 	Id             int      `json:"id"`
 	GroupLocations []string `json:"locations"`
+	LocationsMap   map[string][]string
 }
 
 type Relations struct {
