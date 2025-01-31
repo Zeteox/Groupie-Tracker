@@ -11,7 +11,6 @@ import (
 
 func HandlerFilterPage(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "text/html; charset=utf-8")
-
 	templ, err := template.New("FilterModel.gohtml").Funcs(template.FuncMap{
 		"Iterate": func(count int) []int {
 			var Items []int
@@ -23,6 +22,14 @@ func HandlerFilterPage(w http.ResponseWriter, r *http.Request) {
 		"GetCareerOrAlbumYears": func(index int) string {
 			careerAndAlbumDates := []string{"1970-1979", "1980-1989", "1990-1999", "2000-2009", "2010-2019", "2020-2025"}
 			return careerAndAlbumDates[index]
+		},
+		"GetAllGroupsName": func() string {
+			var Names string
+			artists, _ := Utils.GetArtists()
+			for x := 0; x < len(artists); x++ {
+				Names += artists[x].Name + ","
+			}
+			return Names[:len(Names)-1]
 		},
 	}).ParseFiles("./Frontend/Templates/FilterModel.gohtml")
 	if err != nil {
@@ -89,6 +96,11 @@ func HandlerFilterPage(w http.ResponseWriter, r *http.Request) {
 			}
 			data.Artists = tmpData
 		}
+
+		fmt.Println("nb m:" + data.FormData.MemberNumber)
+		data.FormData.SearchbarContent = r.FormValue("Searchbar")
+		fmt.Println("search:" + data.FormData.SearchbarContent)
+
 	}
 
 	err = templ.Execute(w, data)

@@ -5,6 +5,7 @@
     <title>Groupify</title>
     <script>
         document.getElementById("MembersNumber").value = {{.FormData.MemberNumber}}
+
         function Range() {
             const slider = document.getElementById("MembersNumber");
             const val = slider.value;
@@ -13,12 +14,89 @@
             } else {
                 document.getElementById("LabelMembers").innerHTML = "All"
             }
+
+        }
+
+        function myFunction() {
+            const input = document.getElementById("searchBar");
+            const filter = input.value.toUpperCase();
+            const ul = document.getElementById("groups");
+            const li = ul.getElementsByTagName("li");
+
+            for (i = 0; i < li.length; i++) {
+                const txtValue = li[i].textContent || li[i].innerText;
+                li[i].style.display = input.value.length && txtValue.toUpperCase().indexOf(filter) > -1 ? "block" : "none";
+            }
         }
     </script>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        #searchBar {
+            width: 30%;
+            font-size: 16px;
+            padding: 12px 20px 12px 40px;
+            border: 1px solid #ddd;
+            margin-bottom: 12px;
+        }
+
+        #groups {
+            position: absolute;
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+            aspect-ratio: 1/1;
+            width: 30%;
+            overflow: auto;
+        }
+
+        #groups li {
+            display: none;
+        }
+
+        #groups li a {
+            border: 1px solid #ddd;
+            margin-top: -1px;
+            /* Prevent double borders */
+            background-color: #f6f6f6;
+            padding: 12px;
+            text-decoration: none;
+            font-size: 18px;
+            color: black;
+            display: block;
+        }
+
+        #groups li a:hover:not(.header) {
+            background-color: #eee;
+        }
+
+    </style>
 </head>
 
 <body>
-    <form method="post">
+    <form method="post" id="FiltersForm">
+
+        <div>
+            <input type="text" onkeyup="myFunction()"
+                   placeholder="Group or artist name"
+                   value="{{.FormData.SearchbarContent}}"
+                   name="Searchbar"
+                   autocomplete="off"
+                   id="searchBar">
+            <ul id="groups">
+                {{range .Artists}}
+                    <li><a href="/Infos?Id={{.Id}}">{{.Name}} - Group</a></li>
+                    {{$id := .Id}}
+                    {{range .Members}}
+                        <li><a href="/Infos?Id={{$id}}">{{.}} - Member</a></li>
+                    {{end}}
+                {{end}}
+            </ul>
+            <br>
+        </div>
+
         <div>
             <h3>CAREER</h3>
             {{range $index, $item := .FormData.CareerYears}}
@@ -65,13 +143,25 @@
                 {{end}}
             </label>
         </div>
+        <label>
+            <h3>Country</h3>
+            <select name="country">
+                <option>Select a Country</option>
+                <option>France</option> 
+                <option>oui</option>
+                <option>non</option>
+            </select>
+        </label>
+        <br>
+        <br>
         <div>
             <button type="submit">Filter</button>
         </div>
+
     </form>
 
 {{range .Artists}}
-    <img src="{{.Image}}" alt="{{.Name}}.png"/>
+    <a href="/Infos"><img src="{{.Image}}" alt="{{.Name}}.png"/></a>
 {{end}}
 
 </body>
