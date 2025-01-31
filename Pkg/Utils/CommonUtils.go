@@ -12,6 +12,7 @@ func Find(a []string, x string) int {
 }
 
 func SetupForm(form *DataStruct.Form) {
+	form.SearchbarContent = ""
 	form.CareerYears = []string{"", "", "", "", "", ""}
 	form.AlbumYears = []string{"", "", "", "", "", ""}
 	form.MemberNumber = "0"
