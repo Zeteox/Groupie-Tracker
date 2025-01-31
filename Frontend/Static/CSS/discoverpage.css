@@ -6,35 +6,44 @@
     font-family: Buster;
     src: url("https://fonts.cdnfonts.com/css/buster");
 }
-.home-button {
-    position: absolute;
-    top: 5px;
-    right: 10px;
-    background-color: white;
-    font-size: 12px;
+
+.background {
+    background-image: url("/Static/Images/vinyle_banner1.jpg");
+    background-size: 100vw 20vh;
+    background-repeat: no-repeat;
+    text-align: center;
 }
 
 .logo {
-   position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 70px;
-
+    margin-top: 0;
+    height: 10%;
+    width: 10%;
 }
-.banner {
+.home-button {
+    display : block;
     position: absolute;
-    background-position: top center;
+    color : #000000;
+    background-color: #ffffff;
+    width: 4%;
+    height: 35px;
+    margin-top: 10px;
+    margin-left: 10px;
+    border-radius: 8px;
 }
 
 label.search-button {
+    position: absolute;
+    background-position: left;
+    font-style: italic;
     font-family: Montserrat, serif;
     font-size: 11px;
-
 }
+
 .search-button {
     top: 0;
-    left: 0;
-    background-color: white;
+    right: 10px;
+    background-color: #a9a9a9;
+    background-position: left;
+    font-family: Montserrat, serif ;
     font-size: 10px;
 }
