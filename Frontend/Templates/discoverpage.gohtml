@@ -4,7 +4,35 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" charset="UTF-8" lang="en">
     <title>Groupify</title>
     <link rel="stylesheet" href="/Static/CSS/discoverpage.css">
+
+    <script>
+        document.getElementById("MembersNumber").value = {{.FormData.MemberNumber}}
+
+            function Range() {
+                const slider = document.getElementById("MembersNumber");
+                const val = slider.value;
+                if (val>0) {
+                    document.getElementById("LabelMembers").innerHTML = val
+                } else {
+                    document.getElementById("LabelMembers").innerHTML = "All"
+                }
+
+            }
+
+        function myFunction() {
+            const input = document.getElementById("searchBar");
+            const filter = input.value.toUpperCase();
+            const ul = document.getElementById("groups");
+            const li = ul.getElementsByTagName("li");
+
+            for (i = 0; i < li.length; i++) {
+                const txtValue = li[i].textContent || li[i].innerText;
+                li[i].style.display = input.value.length && txtValue.toUpperCase().indexOf(filter) > -1 ? "block" : "none";
+            }
+        }
+    </script>
 </head>
+
 <body class="background">
         <form action="/">
             <button type="submit" class="home-button">Home</button>
@@ -12,12 +40,91 @@
     <img src="/Static/Images/Groupify_blanc.png"
          class="logo" alt="White record player">
 
-    <form id="form">
-        <label for="search">
-            <input type="search" class="search-input" id="search" name="search" placeholder="Discover...">
-        </label>
+    <form id="FiltersForm" method="post">
         <button class="search-button">Search</button>
-    </form>
+        <input type="text" onkeyup="myFunction()"
+               placeholder="Discover..."
+               value="{{.FormData.SearchbarContent}}"
+               name="Searchbar"
+               autocomplete="off"
+               id="searchBar"
+               class="search-input">
+        <ul id="groups">
+            {{range .Artists}}
+                <li><a href="/Infos?Id={{.Id}}">{{.Name}} - Group</a></li>
+                {{$id := .Id}}
+                {{range .Members}}
+                    <li><a href="/Infos?Id={{$id}}">{{.}} - Member</a></li>
+                {{end}}
+            {{end}}
+        </ul>
+
+            <div>
+                <h3>CAREER</h3>
+                {{range $index, $item := .FormData.CareerYears}}
+                    {{if eq $item ""}}
+                        <label>
+                            <input type="checkbox" value="1" name="career:{{GetCareerOrAlbumYears $index}}">
+                            {{GetCareerOrAlbumYears $index}}
+                        </label>
+                    {{else}}
+                        <label>
+                            <input type="checkbox" value="1" name="career:{{GetCareerOrAlbumYears $index}}" checked>
+                            {{GetCareerOrAlbumYears $index}}
+                        </label>
+                    {{end}}
+                    <br>
+                {{end}}
+
+            </div>
+            <div>
+                <h3>ALBUM</h3>
+                {{range $index, $item := .FormData.AlbumYears}}
+                    {{if eq $item ""}}
+                        <label>
+                            <input type="checkbox" value="1" name="album:{{GetCareerOrAlbumYears $index}}">
+                            {{GetCareerOrAlbumYears $index}}
+                        </label>
+                    {{else}}
+                        <label>
+                            <input type="checkbox" value="1" name="album:{{GetCareerOrAlbumYears $index}}" checked>
+                            {{GetCareerOrAlbumYears $index}}
+                        </label>
+                    {{end}}
+                    <br>
+                {{end}}
+            </div>
+            <div>
+                <h3>MEMBERS</h3>
+                <input type="range" min="0" max="6" value="{{.FormData.MemberNumber}}" step="1" name="MembersNumber" id="MembersNumber" oninput="Range()">
+                <label for="MembersNumber" id="LabelMembers">
+                    {{if eq .FormData.MemberNumber "0"}}
+                        All
+                    {{else}}
+                        {{.FormData.MemberNumber}}
+                    {{end}}
+                </label>
+            </div>
+            <label>
+                <h3>Country</h3>
+                <select name="country">
+                    <option>Select a Country</option>
+                    <option>France</option>
+                    <option>oui</option>
+                    <option>non</option>
+                </select>
+            </label>
+            <br>
+            <br>
+            <div>
+                <button type="submit">Filter</button>
+            </div>
+
+        </form>
+
+        {{range .Artists}}
+            <a href="/Infos"><img src="{{.Image}}" alt="{{.Name}}.png"/></a>
+        {{end}}
 
 </body>
 </html>
