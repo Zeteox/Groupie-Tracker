@@ -97,10 +97,7 @@ func HandlerFilterPage(w http.ResponseWriter, r *http.Request) {
 			data.Artists = tmpData
 		}
 
-		fmt.Println("nb m:" + data.FormData.MemberNumber)
 		data.FormData.SearchbarContent = r.FormValue("Searchbar")
-		fmt.Println("search:" + data.FormData.SearchbarContent)
-
 	}
 
 	err = templ.Execute(w, data)

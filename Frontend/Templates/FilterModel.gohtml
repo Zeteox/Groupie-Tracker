@@ -35,7 +35,7 @@
         }
 
         #searchBar {
-            width: 30%;
+            width: 100%;
             font-size: 16px;
             padding: 12px 20px 12px 40px;
             border: 1px solid #ddd;
@@ -48,7 +48,7 @@
             padding: 0;
             margin: 0;
             aspect-ratio: 1/1;
-            width: 30%;
+            width: auto;
             overflow: auto;
         }
 
@@ -70,6 +70,18 @@
 
         #groups li a:hover:not(.header) {
             background-color: #eee;
+        }
+
+        #FiltersForm {
+            position: absolute;s
+            width: 20vw;
+            height: 100vh;
+            z-index: 100;
+        }
+
+        #gr {
+            position: absolute;
+            left: 20vw;
         }
 
     </style>
@@ -160,9 +172,11 @@
 
     </form>
 
-{{range .Artists}}
-    <a href="/Infos"><img src="{{.Image}}" alt="{{.Name}}.png"/></a>
-{{end}}
+    <div id="gr">
+    {{range .Artists}}
+        <a href="/Infos"><img src="{{.Image}}" alt="{{.Name}}.png"/></a>
+    {{end}}
+    </div>
 
 </body>
 
