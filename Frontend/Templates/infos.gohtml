@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="Static/CSS/infos.css">
+    <title>Who's that band ?</title>
+</head>
+<body class="background">
+<form action="/">
+    <button type="submit" class="homeButton">Home</button>
+</form>
+    <div>
+        <img class="logo" src="../Static/Images/Groupify_blanc.png" alt="Logo blanc">
+        <br>
+    </div>
+<a href="/Discover" class="btn">< Back</a>
+    <div class="content">
+
+                <img class="albumCover" src="{{.Image}}" alt="Image album">
+                <div class="description">
+                    <h1>{{.Name}}</h1>
+                    <b> Members : </b> {{range .Members}}
+                        {{.}}<br>
+                    {{end}} <br>
+                    <b>Creation date : </b> {{.CreationDate}} <br>
+                    <b>First album : </b> {{.FirstAlbum}} <br><br>
+
+                    <h1 style="display: inline;">Concerts</h1> <br>
+                    {{range  $index, $elem := .AllLocations.GroupLocations}} <br>
+                    {{$cityCountry := CityWithCountry $elem}}
+                    {{index $cityCountry 0}} ,<i> {{index $cityCountry 1}} : </i>
+                        {{range $index, $date := $.AllRelations.Dates}}
+                            {{if eq $index $elem}}
+                                {{index . 0}}
+                            {{end}}
+                        {{end}}
+                    {{end}} <br>
+
+                </div>
+    </div>
+</body>
+<footer>
+    <p>By : Loïc Delprat, Elisabeth Robl and Melisa Mckenzie</p>
+</footer>
+</html>

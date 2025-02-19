@@ -1,0 +1,60 @@
+.background {
+    background-image: url("/Static/Images/vinyle_banner1.jpg");
+    width: 100vw;
+    margin: 0;
+    background-repeat: no-repeat;
+}
+
+.logo {
+    display: flex;
+    position: relative;
+    margin: auto;
+    height: 10%;
+    width: 10%;
+}
+
+.homeButton {
+    display : block;
+    position: absolute;
+    color : #000000;
+    background-color: #ffffff;
+    width: 4%;
+    height: 35px;
+    margin-top: 10px;
+    margin-left: 10px;
+    border-radius: 8px;
+}
+
+.btn {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: black;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    margin-left: 100px;
+}
+
+.albumCover {
+    width: 22vw;
+    position: absolute;
+    border-radius: 8px;
+    margin-left: 900px;
+}
+
+.description {
+    position: absolute;
+    margin-left: 300px;
+    text-align: left;
+}
+
+footer {
+    position: absolute;
+    width: 100vw;
+    left: 0;
+    margin: 0;
+    text-align: center;
+    color: #000000;
+    bottom: 0;
+    font-style: italic;
+}

@@ -125,8 +125,8 @@
                 {{end}}
                 <br>
             {{end}}
-
         </div>
+
         <div>
             <h3>ALBUM</h3>
             {{range $index, $item := .FormData.AlbumYears}}
@@ -144,6 +144,7 @@
                 <br>
             {{end}}
         </div>
+
         <div>
             <h3>MEMBERS</h3>
             <input type="range" min="0" max="6" value="{{.FormData.MemberNumber}}" step="1" name="MembersNumber" id="MembersNumber" oninput="Range()">
@@ -155,6 +156,7 @@
                 {{end}}
             </label>
         </div>
+
         <label>
             <h3>Country</h3>
             <select name="country">

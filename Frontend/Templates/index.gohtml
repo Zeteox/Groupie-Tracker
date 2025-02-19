@@ -1,7 +1,19 @@
 <!DOCTYPE html>
 <html lang="fr">
-<body>
-{{with $n := index . 0}}{{$n}}{{end}}
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="Static/CSS/index.css">
+    <title>Welcome on Groupify</title>
+</head>
+<body class="background">
+    <div>
+        <img class="img" src="../Static/Images/Groupify_noir.png" alt="Logo noir">
+        <form action="/Infos">
+            <button type="submit" class="buttonDiscover">Discover the artists</button>
+        </form>
+    </div>
+    <footer>
+        <p>By : Loïc Delprat, Elisabeth Robl and Melisa Mckenzie</p>
+    </footer>
 </body>
-
 </html>

@@ -42,6 +42,11 @@ func GetArtistsById(id int) (DataStruct.Artist, error) {
 }
 
 func GetLocationsByID(id int) (DataStruct.Locations, error) {
+	if id > 52 {
+		id = 52
+	} else if id < 1 {
+		id = 1
+	}
 	resp, err := http.Get("https://groupietrackers.herokuapp.com/api/locations/" + strconv.Itoa(id))
 	if err != nil {
 		return DataStruct.Locations{}, err
@@ -52,10 +57,16 @@ func GetLocationsByID(id int) (DataStruct.Locations, error) {
 	if err := json.NewDecoder(resp.Body).Decode(&Locations); err != nil {
 		return DataStruct.Locations{}, err
 	}
+
 	return Locations, nil
 }
 
 func GetRelationsByID(id int) (DataStruct.Relations, error) {
+	if id > 52 {
+		id = 52
+	} else if id < 1 {
+		id = 1
+	}
 	resp, err := http.Get("https://groupietrackers.herokuapp.com/api/relation/" + strconv.Itoa(id))
 	if err != nil {
 		return DataStruct.Relations{}, err
@@ -70,6 +81,11 @@ func GetRelationsByID(id int) (DataStruct.Relations, error) {
 }
 
 func GetDatesByID(id int) (DataStruct.Dates, error) {
+	if id > 52 {
+		id = 52
+	} else if id < 1 {
+		id = 1
+	}
 	resp, err := http.Get("https://groupietrackers.herokuapp.com/api/dates/" + strconv.Itoa(id))
 	if err != nil {
 		return DataStruct.Dates{}, err

@@ -11,8 +11,9 @@ func CreateAndListenServer(port int) {
 	//Creation of routes for all pages
 	http.HandleFunc("/", Handlers.HandlerIndexPage)
 	http.HandleFunc("/Filter", Handlers.HandlerFilterPage)
+	http.HandleFunc("/Infos", Handlers.HandlerInfosPage)
 
-	//Creation of route for statics files
+	//Creation of route for statics file
 	fs := http.FileServer(http.Dir("./Frontend/Static"))
 	http.Handle("/Static/", http.StripPrefix("/Static/", fs))
 
