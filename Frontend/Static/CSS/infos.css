@@ -25,22 +25,27 @@
     border-radius: 8px;
 }
 
+.btn {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: black;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    margin-left: 100px;
+}
+
 .albumCover {
     width: 22vw;
     position: absolute;
     border-radius: 8px;
-    margin-top: 25px;
     margin-left: 900px;
-}
-
-.bold{
-    font-weight: bold;
 }
 
 .description {
     position: absolute;
     margin-left: 300px;
-    text-align: justify;
+    text-align: left;
 }
 
 footer {
