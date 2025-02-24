@@ -4,48 +4,29 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" charset="UTF-8" lang="en">
     <title>Groupify</title>
     <link rel="stylesheet" href="/Static/CSS/discoverpage.css">
-
+    <script src="../Static/JS/discoverpage.js"></script>
     <script>
         document.getElementById("MembersNumber").value = {{.FormData.MemberNumber}}
-
-            function Range() {
-                const slider = document.getElementById("MembersNumber");
-                const val = slider.value;
-                if (val>0) {
-                    document.getElementById("LabelMembers").innerHTML = val
-                } else {
-                    document.getElementById("LabelMembers").innerHTML = "All"
-                }
-
-            }
-
-        function myFunction() {
-            const input = document.getElementById("searchBar");
-            const filter = input.value.toUpperCase();
-            const ul = document.getElementById("groups");
-            const li = ul.getElementsByTagName("li");
-
-            for (i = 0; i < li.length; i++) {
-                const txtValue = li[i].textContent || li[i].innerText;
-                li[i].style.display = input.value.length && txtValue.toUpperCase().indexOf(filter) > -1 ? "block" : "none";
-            }
-        }
     </script>
 </head>
 
 <body>
-<div class="background">
-    <a href="/"><button class="home-button">Home</button></a>
-    <img src="/Static/Images/Groupify_blanc.png" class="logo" alt="White record player">
-</div>
+    <div class="background">
+        <a href="/"><button class="home-button">Home</button></a>
+        <img src="/Static/Images/Groupify_blanc.png" class="logo" alt="White record player">
+    </div>
 
     <form id="FiltersForm" method="post">
-        <input type="text" onkeyup="myFunction()"
-               placeholder="Discover..."
-               value="{{.FormData.SearchbarContent}}"
-               name="Searchbar"
-               autocomplete="off"
-               id="searchBar">
+        <div class="search">
+            <input type="text" onkeyup="myFunction()"
+                   placeholder="Search artists/groups..."
+                   value="{{.FormData.SearchbarContent}}"
+                   name="searchBar"
+                   autocomplete="off"
+                   id="searchBar">
+        </div>
+
+        <button type="submit" id="search-button"></button>
         <ul id="groups">
             {{range .Artists}}
                 <li><a href="/Infos?Id={{.Id}}">{{.Name}} - Group</a></li>
@@ -72,8 +53,8 @@
                     {{end}}
                     <br>
                 {{end}}
-
             </div>
+
             <div class="album-filter">
                 <h3>ALBUM</h3>
                 {{range $index, $item := .FormData.AlbumYears}}
@@ -91,6 +72,7 @@
                     <br>
                 {{end}}
             </div>
+
             <div class="member-filter">
                 <h3>MEMBERS</h3>
                 <input type="range" min="0" max="6" value="{{.FormData.MemberNumber}}" step="1" name="MembersNumber" id="MembersNumber" oninput="Range()">
@@ -105,9 +87,9 @@
 
             <div class="concert-location">
                 <label>
-                    <h3>COUNTRY</h3>
+                    <h3>LOCATION</h3>
                     <select name="country">
-                    <option>Select a Country</option>
+                    <option>Select a location</option>
                     <option>France</option>
                     <option>Yes</option>
                     <option>No</option>
