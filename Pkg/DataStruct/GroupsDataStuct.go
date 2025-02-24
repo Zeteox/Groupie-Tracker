@@ -32,9 +32,11 @@ type Form struct {
 	CareerYears      []string
 	AlbumYears       []string
 	MemberNumber     string
+	Country          string
 }
 
 type ArtistsAndForm struct {
-	Artists  []Artist
-	FormData Form
+	AllArtists      []Artist
+	FilteredArtists []Artist
+	FormData        Form
 }

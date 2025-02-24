@@ -73,7 +73,7 @@
         }
 
         #FiltersForm {
-            position: absolute;s
+            position: absolute;
             width: 20vw;
             height: 100vh;
             z-index: 100;
@@ -82,6 +82,18 @@
         #gr {
             position: absolute;
             left: 20vw;
+        }
+
+        #btn_search {
+            position: absolute;
+            background-image: url("/Static/Images/Groupify_noir.png");
+            background-size: cover;
+            z-index: 100000;
+            top: 10px;
+            left: 17vw;
+            height: 2vw;
+            border: none;
+            aspect-ratio: 1/1;
         }
 
     </style>
@@ -98,7 +110,7 @@
                    autocomplete="off"
                    id="searchBar">
             <ul id="groups">
-                {{range .Artists}}
+                {{range .AllArtists}}
                     <li><a href="/Infos?Id={{.Id}}">{{.Name}} - Group</a></li>
                     {{$id := .Id}}
                     {{range .Members}}
@@ -106,8 +118,11 @@
                     {{end}}
                 {{end}}
             </ul>
+            <button type="submit" id="btn_search"></button>
             <br>
+
         </div>
+
 
         <div>
             <h3>CAREER</h3>
@@ -160,10 +175,17 @@
         <label>
             <h3>Country</h3>
             <select name="country">
-                <option>Select a Country</option>
-                <option>France</option> 
-                <option>oui</option>
-                <option>non</option>
+                <option value="">Select a Location</option>
+                {{range .AllArtists}}
+                    {{range .AllLocations.GroupLocations}}
+                        {{$cityCountry := CityWithCountry .}}
+                            {{if eq . $.FormData.Country}}
+                                <option value="{{.}}" selected>{{index $cityCountry 0}}</option>
+                            {{else}}
+                                <option value="{{.}}">{{index $cityCountry 0}}</option>
+                            {{end}}
+                    {{end}}
+                {{end}}
             </select>
         </label>
         <br>
@@ -175,8 +197,8 @@
     </form>
 
     <div id="gr">
-    {{range .Artists}}
-        <a href="/Infos"><img src="{{.Image}}" alt="{{.Name}}.png"/></a>
+    {{range .FilteredArtists}}
+        <a href="/Infos?Id={{.Id}}"><img src="{{.Image}}" alt="{{.Name}}.png"/></a>
     {{end}}
     </div>
 
