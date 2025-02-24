@@ -1,12 +1,9 @@
-@font-face {
-    font-family: Montserrat;
-    src: url("https://fonts.googleapis.com/css?family=Montserrat");
-}
-
 * {
     padding: 0;
     margin: 0;
+    box-sizing: border-box;
 }
+
 .background {
     background-image: url("/Static/Images/vinyle_banner1.jpg");
     background-size: 100vw 20vh;
@@ -31,33 +28,33 @@
     border-radius: 8px;
 }
 
-.search-button {
-    top: 0;
-    right: 10px;
-    background-color: #a9a9a9;
-    background-position: left;
-    font-family: Montserrat, serif ;
-    font-size: 10px;
-}
-
- * {
-     box-sizing: border-box;
- }
-
 #searchBar {
-    width: 20%;
-    font-size: 15px;
-    padding: 12px 20px 12px 40px;
+    border-radius: 19px;
+    position: relative;
+    width: 14vw;
+    font-size: 13px;
+    padding: 12px 15px 12px 15px;
     border: 1px solid #ddd;
-    margin-top: 5px;
-    margin-bottom: 15px;
-    margin-left: 5px;
-
+    margin-top: 10px;
+    margin-left: 8px;
+    margin-bottom: 10px;
 }
+
+#search-button {
+    position: absolute;
+    background: url("/Static/Images/Search_icon.png"), transparent;
+    background-size: cover;
+    z-index: 100000;
+    top: 20px;
+    left: 180px;
+    height: 3vh;
+    border: none;
+    aspect-ratio: 1/1;
+}
+
 h3 {
-    margin-top: 5px;
-    margin-bottom: 5px;
-    font-family: Montserrat, serif;
+    margin-top: 10px;
+    margin-bottom: 10px;
 }
 #groups {
     position: absolute;
@@ -65,7 +62,7 @@ h3 {
     padding: 0;
     margin: 0;
     aspect-ratio: 1/1;
-    width: 30%;
+    width: auto;
     overflow: auto;
 }
 
@@ -76,7 +73,6 @@ h3 {
 #groups li a {
     border: 1px solid #ddd;
     margin-top: -1px;
-    /* Prevent double borders */
     background-color: #f6f6f6;
     padding: 12px;
     text-decoration: none;
@@ -89,12 +85,37 @@ h3 {
     background-color: #eee;
 }
 
-.career-filter, .album-filter, .member-filter, .concert-location, .filter-button {
+#FiltersForm {
+    position: absolute;
+    width: 20vw;
+    height: 100vh;
+    z-index: 100;
+}
+
+select {
     margin-top: 5px;
+    width: 10vw;
+}
+#filter-button {
+    display : block;
+    position: absolute;
+    color : #000000;
+    background-color: #cac6d0;
+    font-size: 13px;
+    width: 4vw;
+    height: 3vh;
+    margin-top: 5px;
+    margin-left: 10px;
+    border-radius: 5px;
+}
+.career-filter, .album-filter, .member-filter, .concert-location {
+    margin-top: 5px;
+    margin-bottom: 15px;
     margin-left: 10px;
 }
 
 .images {
     text-align: right;
+    margin-top: 65px;
+    margin-right: 20px;
 }
-
