@@ -42,6 +42,11 @@ func GetArtistsById(id int) (DataStruct.Artist, error) {
 }
 
 func GetLocationsByID(id int) (DataStruct.Locations, error) {
+	if id > 52 {
+		id = 52
+	} else if id < 1 {
+		id = 1
+	}
 	resp, err := http.Get("https://groupietrackers.herokuapp.com/api/locations/" + strconv.Itoa(id))
 	if err != nil {
 		return DataStruct.Locations{}, err
@@ -53,29 +58,15 @@ func GetLocationsByID(id int) (DataStruct.Locations, error) {
 		return DataStruct.Locations{}, err
 	}
 
-	m := make(map[string][]string)
-
-	for _, elems := range Locations.GroupLocations {
-		for index, letters := range elems {
-			if letters == '-' {
-				index += 1
-				if len(m[elems[index:]]) != 0 {
-					m[elems[index:]] = append(m[elems[index:]], elems[:index-1])
-				} else {
-					m[elems[index:]] = []string{}
-					m[elems[index:]] = append(m[elems[index:]], elems[:index-1])
-				}
-				break
-			}
-		}
-	}
-
-	Locations.LocationsMap = m
-
 	return Locations, nil
 }
 
 func GetRelationsByID(id int) (DataStruct.Relations, error) {
+	if id > 52 {
+		id = 52
+	} else if id < 1 {
+		id = 1
+	}
 	resp, err := http.Get("https://groupietrackers.herokuapp.com/api/relation/" + strconv.Itoa(id))
 	if err != nil {
 		return DataStruct.Relations{}, err
@@ -90,6 +81,11 @@ func GetRelationsByID(id int) (DataStruct.Relations, error) {
 }
 
 func GetDatesByID(id int) (DataStruct.Dates, error) {
+	if id > 52 {
+		id = 52
+	} else if id < 1 {
+		id = 1
+	}
 	resp, err := http.Get("https://groupietrackers.herokuapp.com/api/dates/" + strconv.Itoa(id))
 	if err != nil {
 		return DataStruct.Dates{}, err

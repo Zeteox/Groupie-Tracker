@@ -15,7 +15,6 @@ type Artist struct {
 type Locations struct {
 	Id             int      `json:"id"`
 	GroupLocations []string `json:"locations"`
-	LocationsMap   map[string][]string
 }
 
 type Relations struct {
@@ -33,9 +32,11 @@ type Form struct {
 	CareerYears      []string
 	AlbumYears       []string
 	MemberNumber     string
+	Country          string
 }
 
 type ArtistsAndForm struct {
-	Artists  []Artist
-	FormData Form
+	AllArtists      []Artist
+	FilteredArtists []Artist
+	FormData        Form
 }

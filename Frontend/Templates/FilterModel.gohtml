@@ -35,7 +35,7 @@
         }
 
         #searchBar {
-            width: 30%;
+            width: 100%;
             font-size: 16px;
             padding: 12px 20px 12px 40px;
             border: 1px solid #ddd;
@@ -48,7 +48,7 @@
             padding: 0;
             margin: 0;
             aspect-ratio: 1/1;
-            width: 30%;
+            width: auto;
             overflow: auto;
         }
 
@@ -72,6 +72,30 @@
             background-color: #eee;
         }
 
+        #FiltersForm {
+            position: absolute;
+            width: 20vw;
+            height: 100vh;
+            z-index: 100;
+        }
+
+        #gr {
+            position: absolute;
+            left: 20vw;
+        }
+
+        #btn_search {
+            position: absolute;
+            background-image: url("/Static/Images/Groupify_noir.png");
+            background-size: cover;
+            z-index: 100000;
+            top: 10px;
+            left: 17vw;
+            height: 2vw;
+            border: none;
+            aspect-ratio: 1/1;
+        }
+
     </style>
 </head>
 
@@ -86,7 +110,7 @@
                    autocomplete="off"
                    id="searchBar">
             <ul id="groups">
-                {{range .Artists}}
+                {{range .AllArtists}}
                     <li><a href="/Infos?Id={{.Id}}">{{.Name}} - Group</a></li>
                     {{$id := .Id}}
                     {{range .Members}}
@@ -94,8 +118,11 @@
                     {{end}}
                 {{end}}
             </ul>
+            <button type="submit" id="btn_search"></button>
             <br>
+
         </div>
+
 
         <div>
             <h3>CAREER</h3>
@@ -113,8 +140,8 @@
                 {{end}}
                 <br>
             {{end}}
-
         </div>
+
         <div>
             <h3>ALBUM</h3>
             {{range $index, $item := .FormData.AlbumYears}}
@@ -132,6 +159,7 @@
                 <br>
             {{end}}
         </div>
+
         <div>
             <h3>MEMBERS</h3>
             <input type="range" min="0" max="6" value="{{.FormData.MemberNumber}}" step="1" name="MembersNumber" id="MembersNumber" oninput="Range()">
@@ -143,13 +171,21 @@
                 {{end}}
             </label>
         </div>
+
         <label>
             <h3>Country</h3>
             <select name="country">
-                <option>Select a Country</option>
-                <option>France</option> 
-                <option>oui</option>
-                <option>non</option>
+                <option value="">Select a Location</option>
+                {{range .AllArtists}}
+                    {{range .AllLocations.GroupLocations}}
+                        {{$cityCountry := CityWithCountry .}}
+                            {{if eq . $.FormData.Country}}
+                                <option value="{{.}}" selected>{{index $cityCountry 0}}</option>
+                            {{else}}
+                                <option value="{{.}}">{{index $cityCountry 0}}</option>
+                            {{end}}
+                    {{end}}
+                {{end}}
             </select>
         </label>
         <br>
@@ -160,9 +196,11 @@
 
     </form>
 
-{{range .Artists}}
-    <a href="/Infos"><img src="{{.Image}}" alt="{{.Name}}.png"/></a>
-{{end}}
+    <div id="gr">
+    {{range .FilteredArtists}}
+        <a href="/Infos?Id={{.Id}}"><img src="{{.Image}}" alt="{{.Name}}.png"/></a>
+    {{end}}
+    </div>
 
 </body>
 
