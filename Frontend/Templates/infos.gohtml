@@ -2,44 +2,67 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+          integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+          crossorigin=""/>
     <link rel="stylesheet" href="Static/CSS/infos.css">
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+            integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+            crossorigin=""></script>
     <title>Who's that band ?</title>
+    <link rel="shortcut icon" href="Static/Images/favicon.ico" type="image/x-icon">
 </head>
 <body class="background">
+<div class="banner">
 <form action="/">
     <button type="submit" class="homeButton">Home</button>
 </form>
-    <div>
-        <img class="logo" src="../Static/Images/Groupify_blanc.png" alt="Logo blanc">
-        <br>
-    </div>
-<a href="/Discover" class="btn">< Back</a>
+    <img class="logo" src="../Static/Images/Groupify_blanc.png" alt="Logo blanc">
+    <br>
+</div>
+<div class="navigation">
+<a href="/Discover" class="backButton">< Back</a>
+</div>
     <div class="content">
-
                 <img class="albumCover" src="{{.Image}}" alt="Image album">
-                <div class="description">
+        <div class="description">
+                <div class="block1">
                     <h1>{{.Name}}</h1>
                     <b> Members : </b> {{range .Members}}
                         {{.}}<br>
                     {{end}} <br>
                     <b>Creation date : </b> {{.CreationDate}} <br>
                     <b>First album : </b> {{.FirstAlbum}} <br><br>
-
+                </div>
+                <div class="block2">
                     <h1 style="display: inline;">Concerts</h1> <br>
                     {{range  $index, $elem := .AllLocations.GroupLocations}} <br>
                     {{$cityCountry := CityWithCountry $elem}}
-                    {{index $cityCountry 0}} ,<i> {{index $cityCountry 1}} : </i>
+                    {{index $cityCountry 0}}, <i> {{index $cityCountry 1}} : </i>
                         {{range $index, $date := $.AllRelations.Dates}}
                             {{if eq $index $elem}}
                                 {{index . 0}}
                             {{end}}
                         {{end}}
                     {{end}} <br>
-
                 </div>
+        </div>
+        <div id="map"></div>
     </div>
 </body>
 <footer>
     <p>By : Loïc Delprat, Elisabeth Robl and Melisa Mckenzie</p>
 </footer>
 </html>
+<script>
+    var AllLocations = []
+    var AllCoordinates = [];
+    {{range $elem := .AllLocations.GroupLocations}}
+        {{$cityCountry := CityWithCountry $elem}}
+        {{$city := index $cityCountry 0}}
+        AllCoordinates.push({{GetCoordinates $city}});
+        AllLocations.push({{$city}});
+    {{end}}
+    var Paris = {{GetCoordinates "Paris"}};
+</script>
+<script src="Static/JS/Map.js"></script>
