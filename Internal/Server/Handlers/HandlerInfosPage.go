@@ -3,6 +3,7 @@ package Handlers
 import (
 	"GroupieTracker/Pkg/Utils"
 	"fmt"
+	"github.com/rubenv/opencagedata"
 	"html/template"
 	"net/http"
 	"net/url"
@@ -36,6 +37,9 @@ func HandlerInfosPage(w http.ResponseWriter, r *http.Request) {
 
 			return []string{city, country}
 		},
+		"GetCoordinates": func(City string) []float32 {
+			return GetCoordinates(City)
+		},
 	}).ParseFiles("./Frontend/Templates/infos.gohtml")
 	if err != nil {
 		fmt.Println("\033[31m[ERR]\033[0m [ROUTAGE] Error occured when handling index page request: ", err)
@@ -62,4 +66,17 @@ func HandlerInfosPage(w http.ResponseWriter, r *http.Request) {
 	}
 
 	templ.Execute(w, data)
+}
+
+func GetCoordinates(City string) []float32 {
+	geocoder := opencagedata.NewGeocoder("0d377720745249fea9ff7f71830d37c7")
+
+	result, err := geocoder.Geocode(City, nil)
+	if err == nil {
+		fResult := result.Results[0]
+		return []float32{fResult.Geometry.Latitude, fResult.Geometry.Longitude}
+	} else {
+		fmt.Printf("error: %v\n", err)
+	}
+	return []float32{}
 }

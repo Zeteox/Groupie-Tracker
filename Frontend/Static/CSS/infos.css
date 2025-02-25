@@ -60,6 +60,15 @@ footer {
     font-style: italic;
 }
 
+#map {
+    position: absolute;
+    top: 98vh;
+    left: 25vw;
+    height: 70vh;
+    width: 50vw;
+    border: solid black 2px;
+}
+
 @media (max-width: 600px) {
     .logo {width: 30%; }
     .backButton {margin-left: 15px; }
