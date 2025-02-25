@@ -115,7 +115,34 @@ select {
 }
 
 .images {
-    text-align: right;
-    margin-top: 65px;
-    margin-right: 20px;
+    position: absolute;
+    display: table-row-group;
+    text-align: center;
+    top: 23vh;
+    left: 18vw;
+}
+
+.grpImage {
+    border: solid black 0.2vw;
+    border-radius: 1vw;
+    border-spacing: 1vw;
+}
+
+#Form {
+    position: absolute;
+    width: 17vw;
+    height: 1000vh;
+    background-color: #D9D9D9;
+}
+
+#FiltersForm {
+    width: inherit;
+    margin-left: -0.5vw;
+    text-align: center;
+}
+
+@media screen and (max-width: 800px){
+    #Form {
+        width: 100vw;
+    }
 }

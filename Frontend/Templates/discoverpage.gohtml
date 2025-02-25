@@ -1,7 +1,7 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" charset="UTF-8" lang="en">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" charset="UTF-8" lang="fr">
     <title>Groupify</title>
     <link rel="stylesheet" href="/Static/CSS/discoverpage.css">
     <script src="../Static/JS/discoverpage.js"></script>
@@ -16,28 +16,31 @@
         <img src="/Static/Images/Groupify_blanc.png" class="logo" alt="White record player">
     </div>
 
-    <form id="FiltersForm" method="post">
-        <div class="search">
-            <input type="text" onkeyup="myFunction()"
-                   placeholder="Search artists/groups..."
-                   value="{{.FormData.SearchbarContent}}"
-                   name="searchBar"
-                   autocomplete="off"
-                   id="searchBar">
-        </div>
+    <div id="Form">
+        <form method="post" id="FiltersForm">
 
-        <button type="submit" id="search-button"></button>
-        <ul id="groups">
-            {{range .Artists}}
-                <li><a href="/Infos?Id={{.Id}}">{{.Name}} - Group</a></li>
-                {{$id := .Id}}
-                {{range .Members}}
-                    <li><a href="/Infos?Id={{$id}}">{{.}} - Member</a></li>
-                {{end}}
-            {{end}}
-        </ul>
+            <div>
+                <input type="text" onkeyup="myFunction()"
+                       placeholder="Group or artist name"
+                       value="{{.FormData.SearchbarContent}}"
+                       name="Searchbar"
+                       autocomplete="off"
+                       id="searchBar">
+                <ul id="groups">
+                    {{range .AllArtists}}
+                        <li><a href="/Infos?Id={{.Id}}">{{.Name}} - Group</a></li>
+                        {{$id := .Id}}
+                        {{range .Members}}
+                            <li><a href="/Infos?Id={{$id}}">{{.}} - Member</a></li>
+                        {{end}}
+                    {{end}}
+                </ul>
+                <button type="submit" id="search-button"></button>
 
-            <div class="career-filter">
+            </div>
+
+
+            <div>
                 <h3>CAREER</h3>
                 {{range $index, $item := .FormData.CareerYears}}
                     {{if eq $item ""}}
@@ -55,7 +58,7 @@
                 {{end}}
             </div>
 
-            <div class="album-filter">
+            <div>
                 <h3>ALBUM</h3>
                 {{range $index, $item := .FormData.AlbumYears}}
                     {{if eq $item ""}}
@@ -73,9 +76,9 @@
                 {{end}}
             </div>
 
-            <div class="member-filter">
+            <div>
                 <h3>MEMBERS</h3>
-                <input type="range" min="0" max="6" value="{{.FormData.MemberNumber}}" step="1" name="MembersNumber" id="MembersNumber" oninput="Range()">
+                <input type="range" min="0" max="7" value="{{.FormData.MemberNumber}}" step="1" name="MembersNumber" id="MembersNumber" oninput="Range()">
                 <label for="MembersNumber" id="LabelMembers">
                     {{if eq .FormData.MemberNumber "0"}}
                         All
@@ -85,25 +88,34 @@
                 </label>
             </div>
 
-            <div class="concert-location">
-                <label>
-                    <h3>LOCATION</h3>
-                    <select name="country">
-                    <option>Select a location</option>
-                    <option>France</option>
-                    <option>Yes</option>
-                    <option>No</option>
-                    </select>
-                </label>
+            <label>
+                <h3>LOCATIONS</h3>
+                <select name="country">
+                    <option value="">Select a Location</option>
+                    {{range .AllArtists}}
+                        {{range .AllLocations.GroupLocations}}
+                            {{$cityCountry := CityWithCountry .}}
+                            {{if eq . $.FormData.Country}}
+                                <option value="{{.}}" selected>{{index $cityCountry 0}}</option>
+                            {{else}}
+                                <option value="{{.}}">{{index $cityCountry 0}}</option>
+                            {{end}}
+                        {{end}}
+                    {{end}}
+                </select>
+            </label>
+            <br>
+            <br>
+            <div>
+                <button type="submit">Filter</button>
             </div>
 
-        <button type="submit" id="filter-button">Filter</button>
-
-
         </form>
+    </div>
+
     <div class="images">
-        {{range .Artists}}
-            <a href="/Infos?Id={{.Id}}"><img src="{{.Image}}" alt="{{.Name}}.png"/></a>
+        {{range .FilteredArtists}}
+            <a href="/Infos?Id={{.Id}}"><img src="{{.Image}}" alt="{{.Name}}.png" class="grpImage"/></a>
         {{end}}
     </div>
 </body>
