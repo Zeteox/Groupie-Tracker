@@ -12,29 +12,29 @@
     <title>Who's that band ?</title>
     <link rel="shortcut icon" href="Static/Images/favicon.ico" type="image/x-icon">
 </head>
-<body class="background">
-<div class="banner">
-<form action="/">
-    <button type="submit" class="homeButton">Home</button>
-</form>
-    <img class="logo" src="../Static/Images/Groupify_blanc.png" alt="Logo blanc">
-    <br>
-</div>
-<div class="navigation">
-<a href="/Discover" class="backButton">< Back</a>
-</div>
-    <div class="content">
-                <img class="albumCover" src="{{.Image}}" alt="Image album">
-        <div class="description">
-                <div class="block1">
+<body>
+    <div class="background">
+        <form action="/">
+        <button type="submit" class="homeButton">Home</button>
+        </form>
+        <img class="logo" src="../Static/Images/Groupify_blanc.png" alt="Logo blanc">
+        <br>
+    </div>
+    <div class="navigation">
+        <a href="/Discover" class="backButton">< Back</a>
+    </div>
+        <div class="content">
+            <img class="albumCover" src="{{.Image}}" alt="Image album">
+            <div class="description">
+                <div class="bloc1">
                     <h1>{{.Name}}</h1>
-                    <b> Members : </b><br> {{range .Members}}
+                    <b>Members :</b><br> {{range .Members}}
                         {{.}}<br>
                     {{end}} <br>
                     <b>Creation date : </b> {{.CreationDate}} <br>
                     <b>First album : </b> {{.FirstAlbum}} <br><br>
                 </div>
-                <div class="block2">
+                <div class="bloc2">
                     <h1 style="display: inline;">Concerts</h1> <br>
                     {{range  $index, $elem := .AllLocations.GroupLocations}} <br>
                     {{$cityCountry := CityWithCountry $elem}}
@@ -46,7 +46,7 @@
                         {{end}}
                     {{end}} <br>
                 </div>
-        </div>
+            </div>
         <div id="map"></div><br><br>
     </div>
 </body>
