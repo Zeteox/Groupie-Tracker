@@ -25,7 +25,7 @@
     border-radius: 8px;
 }
 
-.btn {
+.backButton {
     display: inline-block;
     padding: 10px 20px;
     background-color: black;
@@ -46,6 +46,7 @@
     position: absolute;
     margin-left: 300px;
     text-align: left;
+    width: 100%;
 }
 
 footer {
@@ -57,4 +58,12 @@ footer {
     color: #000000;
     bottom: 0;
     font-style: italic;
+}
+
+@media (max-width: 600px) {
+    .logo {width: 30%; }
+    .backButton {margin-left: 15px; }
+    .albumCover {width: 100%; position: relative; margin-left: 0px}
+    .block1 {width: 100%; text-align: left; }
+    .block2 {width: 100%; text-align: left; }
 }

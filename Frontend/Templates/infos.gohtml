@@ -4,39 +4,43 @@
     <meta charset="UTF-8">
     <link rel="stylesheet" href="Static/CSS/infos.css">
     <title>Who's that band ?</title>
+    <link rel="shortcut icon" href="Static/Images/favicon.ico" type="image/x-icon">
 </head>
 <body class="background">
+<div class="banner">
 <form action="/">
     <button type="submit" class="homeButton">Home</button>
 </form>
-    <div>
-        <img class="logo" src="../Static/Images/Groupify_blanc.png" alt="Logo blanc">
-        <br>
-    </div>
-<a href="/Discover" class="btn">< Back</a>
+    <img class="logo" src="../Static/Images/Groupify_blanc.png" alt="Logo blanc">
+    <br>
+</div>
+<div class="navigation">
+<a href="/Discover" class="backButton">< Back</a>
+</div>
     <div class="content">
-
                 <img class="albumCover" src="{{.Image}}" alt="Image album">
-                <div class="description">
+        <div class="description">
+                <div class="block1">
                     <h1>{{.Name}}</h1>
                     <b> Members : </b> {{range .Members}}
                         {{.}}<br>
                     {{end}} <br>
                     <b>Creation date : </b> {{.CreationDate}} <br>
                     <b>First album : </b> {{.FirstAlbum}} <br><br>
-
+                </div>
+                <div class="block2">
                     <h1 style="display: inline;">Concerts</h1> <br>
                     {{range  $index, $elem := .AllLocations.GroupLocations}} <br>
                     {{$cityCountry := CityWithCountry $elem}}
-                    {{index $cityCountry 0}} ,<i> {{index $cityCountry 1}} : </i>
+                    {{index $cityCountry 0}}, <i> {{index $cityCountry 1}} : </i>
                         {{range $index, $date := $.AllRelations.Dates}}
                             {{if eq $index $elem}}
                                 {{index . 0}}
                             {{end}}
                         {{end}}
                     {{end}} <br>
-
                 </div>
+        </div>
     </div>
 </body>
 <footer>
