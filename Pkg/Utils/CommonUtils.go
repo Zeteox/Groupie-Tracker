@@ -2,6 +2,8 @@ package Utils
 
 import (
 	"GroupieTracker/Pkg/DataStruct"
+	"fmt"
+	"github.com/rubenv/opencagedata"
 	"strings"
 )
 
@@ -53,4 +55,17 @@ func CityWithCountry(cityWithCountry string) []string {
 	}
 
 	return []string{city, country}
+}
+
+func GetCoordinates(City string) []float32 {
+	geocoder := opencagedata.NewGeocoder("0d377720745249fea9ff7f71830d37c7")
+
+	result, err := geocoder.Geocode(City, nil)
+	if err == nil {
+		fResult := result.Results[0]
+		return []float32{fResult.Geometry.Latitude, fResult.Geometry.Longitude}
+	} else {
+		fmt.Printf("error: %v\n", err)
+	}
+	return []float32{}
 }
