@@ -47,9 +47,17 @@ footer {
 }
 
 @media (max-width: 900px) {
-    .content {width: 200%; text-align: left; margin-left: 150px; }
+    .content {
+        width: 200vw;
+        text-align: left;
+        margin-left: 32vw;
+    }
+}
 
-    .img{
-        width: 900%;
+@media (max-width: 500px) {
+    .content {
+        width: 300vw;
+        text-align: left;
+        margin-left: 23vw;
     }
 }

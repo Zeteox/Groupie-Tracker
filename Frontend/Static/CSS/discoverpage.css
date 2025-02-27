@@ -2,11 +2,12 @@
     padding: 0;
     margin: 0;
     box-sizing: border-box;
+    font-family: Arial, sans serif;
 }
 
 .background {
     background-image: url("/Static/Images/vinyle_banner1.jpg");
-    background-size: 100vw 20vh;
+    background-size: 100vw 30vh;
     background-repeat: no-repeat;
     text-align: center;
 }
@@ -14,15 +15,16 @@
 .logo {
     margin-top: 0;
     height: 17vh;
-    width: 10vw;
+    aspect-ratio: 1/1;
 }
 .home-button {
     display : block;
     position: absolute;
     color : #000000;
     background-color: #ffffff;
-    width: 4%;
-    height: 35px;
+    font-size: 13px;
+    width: 4vw;
+    height: 4.7vh;
     margin-top: 10px;
     margin-left: 10px;
     border-radius: 8px;
@@ -38,7 +40,7 @@
     margin-top: 10px;
     margin-left: 8px;
     margin-bottom: 10px;
-    border: solid black 0.1vw;
+    border: solid black 0.2vw;
 }
 
 #search-button {
@@ -96,6 +98,28 @@ h3 {
     text-align: center;
 }
 
+input[type='range'] {
+    overflow: hidden;
+    width: 8vw;
+    -webkit-appearance: none;
+    background-color: #ffffff;
+}
+
+input[type='range']::-webkit-slider-runnable-track {
+    height: 10px;
+    -webkit-appearance: none;
+    color: #808080;
+    margin-top: -1px;
+}
+
+input[type='range']::-webkit-slider-thumb {
+    width: 10px;
+    -webkit-appearance: none;
+    height: 2vh;
+    cursor: w-resize;
+    background: black;
+    box-shadow: -80px 0 0 80px darkgray;
+}
 select {
     margin-top: 5px;
     width: 10vw;
@@ -104,12 +128,12 @@ select {
     display : block;
     position: absolute;
     color : #000000;
-    background-color: #cac6d0;
-    font-size: 13px;
+    background-color:dimgrey;
+    font-size: 15px;
     width: 4vw;
     height: 3vh;
-    margin-top: 5px;
-    margin-left: 10px;
+    margin-top: 1vh;
+    margin-left: 6.5vw;
     border-radius: 5px;
 }
 .career-filter, .album-filter, .member-filter, .concert-location {
@@ -122,18 +146,20 @@ select {
     position: absolute;
     display: table-row-group;
     text-align: center;
-    top: 19.6vh;
+    top: 17.6vh;
     left: 18vw;
     overflow: scroll;
     bottom: -17.6vh;
 }
 
 .grpImage {
-    border: solid black 0.2vw;
+    border: solid black 0.1vw;
     border-radius: 1vw;
     width: 18vw;
     aspect-ratio: 1/1;
     border-spacing: 1vw;
+    box-shadow: 5px 5px 5px grey;
+    margin: 2vh 2vw;
     margin: 2vh 2vw;
     &:hover {
         transform: scale(1.1);
@@ -159,17 +185,128 @@ select {
     width: 13vw;
     border-radius: 1vw;
     aspect-ratio: 6/1;
-    font-size: 1.4vw;
+    font-size: 1.3vw;
+    text-align: center;
 }
 
-#smb_btn {
-    width: 5vw;
-    border-radius: 1vw;
-    border: solid black 0.1vw;
-    font-size: 1.8vw;
+#filter-button {
+    width: 4vw;
+    height: 4vh;
+    left: 1vw;
+    border-radius: 0.5vw;
+    border: solid black 0.15vw;
+    font-size: 1.4vw;
     aspect-ratio: 2/1;
     &:hover {
         background-color: darkgrey;
         transition-duration: 200ms;
+    }
+}
+
+@media screen and (max-width: 820px){
+    .background {
+        height: 17vh;
+    }
+    .home-button {
+        width: 9vw;
+        font-size: 2vw;
+    }
+    #Form {
+        width: 25vw;
+    }
+
+    #FiltersForm {
+        font-size: 2vw;
+    }
+
+    .category{
+        font-size: 3vw;
+    }
+
+    #searchBar {
+        width: 23vw;
+        font-size: 1.9vw;
+    }
+    #search-button {
+        width: 0;
+        aspect-ratio: 1/1;
+    }
+
+    #selector {
+        width: 20vw;
+        aspect-ratio: 5/1;
+        font-size: 2vw;
+    }
+
+    #filter-button {
+        width: 10vw;
+        font-size: 3vw;
+    }
+    #MembersNumber {
+        width: 12vw;
+        height: 0.8vh;
+
+    }
+    .images {
+        top: 17.4vh;
+        margin-left: 7vw;
+    }
+}
+
+@media screen and (max-width: 430px) {
+    .background {
+        height: 10vh;
+    }
+    .logo {
+        height: 10vh;
+        aspect-ratio: 1/1   ;
+    }
+    .home-button {
+        width: 15vw;
+        font-size: 4vw;
+    }
+    #searchBar {
+        width: 26vw;
+        aspect-ratio: 8/1;
+        font-size: 3vw;
+    }
+    #search-button {
+        width: 0;
+        aspect-ratio: 1/1;
+    }
+    .images {
+        top: 11vh;
+        margin-left: 10vw;
+    }
+
+    #Form {
+        width: 30vw;
+    }
+
+    #FiltersForm {
+        width: 30vw;
+        font-size: 3vw;
+    }
+
+    .category {
+        font-size: 4vw;
+    }
+
+    #selector {
+        width: 27vw;
+        height: 3vh;
+        font-size: 3vw;
+    }
+
+    #filter-button {
+        width: 20vw;
+        border-radius: 2vw;
+    }
+}
+
+@media screen and (max-width: 1300px){
+    #search-button {
+        width: 0;
+        aspect-ratio: 1/1;
     }
 }
