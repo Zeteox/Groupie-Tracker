@@ -48,4 +48,8 @@ footer {
 
 @media (max-width: 900px) {
     .content {width: 200%; text-align: left; margin-left: 150px; }
+
+    .img{
+        width: 900%;
+    }
 }
