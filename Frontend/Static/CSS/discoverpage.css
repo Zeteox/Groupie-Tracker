@@ -122,7 +122,7 @@ select {
     position: absolute;
     display: table-row-group;
     text-align: center;
-    top: 17.6vh;
+    top: 19.6vh;
     left: 18vw;
     overflow: scroll;
     bottom: -17.6vh;
@@ -131,8 +131,14 @@ select {
 .grpImage {
     border: solid black 0.2vw;
     border-radius: 1vw;
+    width: 18vw;
+    aspect-ratio: 1/1;
     border-spacing: 1vw;
     margin: 2vh 2vw;
+    &:hover {
+        transform: scale(1.1);
+        transition: transform 0.3s ease;
+    }
 }
 
 #Form {
@@ -162,4 +168,8 @@ select {
     border: solid black 0.1vw;
     font-size: 1.8vw;
     aspect-ratio: 2/1;
+    &:hover {
+        background-color: darkgrey;
+        transition-duration: 200ms;
+    }
 }
