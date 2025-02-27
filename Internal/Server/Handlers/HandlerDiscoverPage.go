@@ -39,7 +39,7 @@ func HandlerDiscoverPage(w http.ResponseWriter, r *http.Request) {
 	}).ParseFiles("./Frontend/Templates/discoverpage.gohtml")
 	if err != nil {
 		fmt.Println("\033[31m[ERR]\033[0m [ROUTAGE] Error occured when handling index page request: ", err)
-		w.WriteHeader(http.StatusInternalServerError)
+		w.WriteHeader(404)
 		w.Header().Set("Content-Type", "text/html; charset=utf-8")
 		return
 	}
@@ -48,7 +48,7 @@ func HandlerDiscoverPage(w http.ResponseWriter, r *http.Request) {
 
 	allArtists, err := Utils.GetArtists()
 	if err != nil {
-		w.WriteHeader(http.StatusInternalServerError)
+		w.WriteHeader(503)
 	}
 	for i := 0; i < len(allArtists); i++ {
 		allArtists[i].AllLocations, err = Utils.GetLocationsByID(i + 1)
@@ -105,6 +105,7 @@ func HandlerDiscoverPage(w http.ResponseWriter, r *http.Request) {
 
 	err = templ.Execute(w, data)
 	if err != nil {
+		w.WriteHeader(503)
 		return
 	}
 }
@@ -123,7 +124,7 @@ func FilterWithSearchBar(r *http.Request, data *DataStruct.ArtistsAndForm) {
 func FilterWithMemberNumber(r *http.Request, w http.ResponseWriter, data *DataStruct.ArtistsAndForm) {
 	numberOfMember, err := strconv.Atoi(r.FormValue("MembersNumber"))
 	if err != nil {
-		w.WriteHeader(http.StatusInternalServerError)
+		w.WriteHeader(500)
 	}
 	data.FormData.MemberNumber = r.FormValue("MembersNumber")
 	if numberOfMember >= 1 {

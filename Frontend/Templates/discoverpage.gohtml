@@ -42,7 +42,7 @@
 
 
             <div>
-                <h3>CAREER</h3>
+                <h3 class="category">CAREER</h3>
                 {{range $index, $item := .FormData.CareerYears}}
                     {{if eq $item ""}}
                         <label>
@@ -60,7 +60,7 @@
             </div>
 
             <div>
-                <h3>ALBUM</h3>
+                <h3 class="category">ALBUM</h3>
                 {{range $index, $item := .FormData.AlbumYears}}
                     {{if eq $item ""}}
                         <label>
@@ -78,7 +78,7 @@
             </div>
 
             <div>
-                <h3>MEMBERS</h3>
+                <h3 class="category">MEMBERS</h3>
                 <input type="range" min="0" max="7" value="{{.FormData.MemberNumber}}" step="1" name="MembersNumber" id="MembersNumber" oninput="Range()">
                 <label for="MembersNumber" id="LabelMembers">
                     {{if eq .FormData.MemberNumber "0"}}
@@ -90,8 +90,8 @@
             </div>
 
             <label>
-                <h3>LOCATIONS</h3>
-                <select name="country">
+                <h3 class="category">LOCATIONS</h3>
+                <select name="country" id="selector">
                     <option value="">Select a Location</option>
                     {{range .AllArtists}}
                         {{range .AllLocations.GroupLocations}}

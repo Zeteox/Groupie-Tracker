@@ -14,8 +14,8 @@
 
 .logo {
     margin-top: 0;
-    height: 10%;
-    width: 10%;
+    height: 17vh;
+    width: 10vw;
 }
 .home-button {
     display : block;
@@ -30,15 +30,16 @@
 }
 
 #searchBar {
-    border-radius: 19px;
+    border-radius: 2vw;
     position: relative;
-    width: 14vw;
-    font-size: 13px;
+    aspect-ratio: 4/1;
+    width: 17vw;
+    font-size: 1.3vw;
     padding: 12px 15px 12px 15px;
-    border: 1px solid #ddd;
     margin-top: 10px;
     margin-left: 8px;
     margin-bottom: 10px;
+    border: solid black 0.1vw;
 }
 
 #search-button {
@@ -46,8 +47,8 @@
     background: url("/Static/Images/Search_icon.png"), transparent;
     background-size: cover;
     z-index: 100000;
-    top: 20px;
-    left: 180px;
+    top: 3.5vh;
+    left: 15.3vw;
     height: 3vh;
     border: none;
     aspect-ratio: 1/1;
@@ -87,10 +88,13 @@ h3 {
 }
 
 #FiltersForm {
-    position: absolute;
-    width: 20vw;
-    height: 100vh;
+    position: sticky;
     z-index: 100;
+    width: inherit;
+    font-size: 1.1vw;
+    font-family: Arial, sans-serif;
+    margin-left: -0.5vw;
+    text-align: center;
 }
 
 input[type='range'] {
@@ -141,29 +145,58 @@ select {
     position: absolute;
     display: table-row-group;
     text-align: center;
-    top: 23vh;
+    top: 19.6vh;
     left: 18vw;
+    overflow: scroll;
+    bottom: -17.6vh;
 }
 
 .grpImage {
-    border: solid grey 1px;
-    border-radius: 0.5vw;
+    border: solid black 0.2vw;
+    border-radius: 1vw;
+    width: 18vw;
+    aspect-ratio: 1/1;
     border-spacing: 1vw;
     box-shadow: 5px 5px 5px grey;
     margin: 2vh 2vw;
+    margin: 2vh 2vw;
+    &:hover {
+        transform: scale(1.1);
+        transition: transform 0.3s ease;
+    }
 }
 
 #Form {
-    position: absolute;
-    width: 17vw;
-    height: 670vh;
+    position: sticky;
+    top: 0;
+    width: 19vw;
+    height: 100vh;
     background-color: #D9D9D9;
 }
 
-#FiltersForm {
-    width: inherit;
-    margin-left: -0.5vw;
-    text-align: center;
+.category {
+    font-size: 1.8vw;
+    font-weight: bold;
+    font-family: Arial, "sans-serif";
+}
+
+#selector {
+    width: 13vw;
+    border-radius: 1vw;
+    aspect-ratio: 6/1;
+    font-size: 1.4vw;
+}
+
+#smb_btn {
+    width: 5vw;
+    border-radius: 1vw;
+    border: solid black 0.1vw;
+    font-size: 1.8vw;
+    aspect-ratio: 2/1;
+    &:hover {
+        background-color: darkgrey;
+        transition-duration: 200ms;
+    }
 }
 
 @media screen and (max-width: 820px){
