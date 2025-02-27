@@ -94,10 +94,14 @@ footer {
     border-radius: 8px;
 }
 
-@media (max-width: 600px) {
-    .logo {width: 30%; }
-    .homeButton {width: 12%; }
-    .backButton {margin-left: 15px; }
-    .albumCover {width: 60%; position: relative; margin-left: 100px; }
-    .description {width: 100%; position: relative; text-align: left; }
+@media (max-width: 1100px) {
+    .logo {width: 18%; }
+    .homeButton {width: 8%; }
+    .backButton {left: 5vw; }
+    .albumCover {width: 30%; position: absolute; left: 14vw; top: 30vh}
+    .description {width: 100%; text-align: left; height: 155vh; }
+    .bloc1 {position: relative; left: 50vw; }
+    .bloc2 {position: relative; left: 15vw; top: 3vh; }
+    #map {width: 90%; left: 5vw; top: 110vh; }
+    footer {top: 105vh; }
 }
