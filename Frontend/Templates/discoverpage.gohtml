@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" charset="UTF-8" lang="fr">
+    <title>Groupify</title>
+    <link rel="stylesheet" href="/Static/CSS/discoverpage.css">
+    <script src="../Static/JS/discoverpage.js"></script>
+    <script>
+        document.getElementById("MembersNumber").value = {{.FormData.MemberNumber}}
+    </script>
+</head>
+
+<body>
+    <div class="background">
+        <a href="/"><button class="home-button">Home</button></a>
+        <img src="/Static/Images/Groupify_blanc.png" class="logo" alt="White record player">
+    </div>
+
+    <div id="Form">
+        <form method="post" id="FiltersForm">
+
+            <div>
+                <input type="text" onkeyup="myFunction()"
+                       placeholder="Group or artist name"
+                       value="{{.FormData.SearchbarContent}}"
+                       name="Searchbar"
+                       autocomplete="off"
+                       id="searchBar">
+                <ul id="groups">
+                    {{range .AllArtists}}
+                        <li><a href="/Infos?Id={{.Id}}">{{.Name}} - Group</a></li>
+                        {{$id := .Id}}
+                        {{range .Members}}
+                            <li><a href="/Infos?Id={{$id}}">{{.}} - Member</a></li>
+                        {{end}}
+                    {{end}}
+                </ul>
+                <button type="submit" id="search-button"></button>
+
+            </div>
+
+
+            <div>
+                <h3 class="category">CAREER</h3>
+                {{range $index, $item := .FormData.CareerYears}}
+                    {{if eq $item ""}}
+                        <label>
+                            <input type="checkbox" value="1" name="career:{{GetCareerOrAlbumYears $index}}">
+                            {{GetCareerOrAlbumYears $index}}
+                        </label>
+                    {{else}}
+                        <label>
+                            <input type="checkbox" value="1" name="career:{{GetCareerOrAlbumYears $index}}" checked>
+                            {{GetCareerOrAlbumYears $index}}
+                        </label>
+                    {{end}}
+                    <br>
+                {{end}}
+            </div>
+
+            <div>
+                <h3 class="category">ALBUM</h3>
+                {{range $index, $item := .FormData.AlbumYears}}
+                    {{if eq $item ""}}
+                        <label>
+                            <input type="checkbox" value="1" name="album:{{GetCareerOrAlbumYears $index}}">
+                            {{GetCareerOrAlbumYears $index}}
+                        </label>
+                    {{else}}
+                        <label>
+                            <input type="checkbox" value="1" name="album:{{GetCareerOrAlbumYears $index}}" checked>
+                            {{GetCareerOrAlbumYears $index}}
+                        </label>
+                    {{end}}
+                    <br>
+                {{end}}
+            </div>
+
+            <div>
+                <h3 class="category">MEMBERS</h3>
+                <input type="range" min="0" max="7" value="{{.FormData.MemberNumber}}" step="1" name="MembersNumber" id="MembersNumber" oninput="Range()">
+                <label for="MembersNumber" id="LabelMembers">
+                    {{if eq .FormData.MemberNumber "0"}}
+                        All
+                    {{else}}
+                        {{.FormData.MemberNumber}}
+                    {{end}}
+                </label>
+            </div>
+
+            <label>
+                <h3 class="category">LOCATIONS</h3>
+                <select name="country" id="selector">
+                    <option value="">Select a Location</option>
+                    {{range .AllArtists}}
+                        {{range .AllLocations.GroupLocations}}
+                            {{$cityCountry := CityWithCountry .}}
+                            {{if eq . $.FormData.Country}}
+                                <option value="{{.}}" selected>{{index $cityCountry 0}}</option>
+                            {{else}}
+                                <option value="{{.}}">{{index $cityCountry 0}}</option>
+                            {{end}}
+                        {{end}}
+                    {{end}}
+                </select>
+            </label>
+            <br>
+            <br>
+            <div>
+                <button type="submit" id="smb_btn">Filter</button>
+            </div>
+
+        </form>
+    </div>
+
+    <div class="images">
+        {{range .FilteredArtists}}
+            <a href="/Infos?Id={{.Id}}"><img src="{{.Image}}" alt="{{.Name}}.png" class="grpImage"/></a>
+        {{end}}
+    </div>
+</body>
+</html>

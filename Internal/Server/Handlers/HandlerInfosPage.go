@@ -21,16 +21,25 @@ func HandlerInfosPage(w http.ResponseWriter, r *http.Request) {
 	}).ParseFiles("./Frontend/Templates/infos.gohtml")
 	if err != nil {
 		fmt.Println("\033[31m[ERR]\033[0m [ROUTAGE] Error occured when handling index page request: ", err)
-		w.WriteHeader(http.StatusInternalServerError)
+		w.WriteHeader(404)
 		w.Header().Set("Content-Type", "text/html; charset=utf-8")
 		return
 	}
 
 	urlStr := "http://" + r.Host + r.URL.Path + "?" + r.URL.RawQuery
-	myUrl, _ := url.Parse(urlStr)
-	param, _ := url.ParseQuery(myUrl.RawQuery)
+	myUrl, err := url.Parse(urlStr)
+	if err != nil {
+		w.WriteHeader(500)
+	}
+	param, err := url.ParseQuery(myUrl.RawQuery)
+	if err != nil {
+		w.WriteHeader(500)
+	}
 	IdStr := param.Get("Id")
-	Id, _ := strconv.Atoi(IdStr)
+	Id, err := strconv.Atoi(IdStr)
+	if err != nil {
+		w.WriteHeader(404)
+	}
 
 	if Id < 1 {
 		Id = 1
@@ -40,8 +49,12 @@ func HandlerInfosPage(w http.ResponseWriter, r *http.Request) {
 
 	data, err := Utils.GetArtistsById(Id)
 	if err != nil {
-		w.WriteHeader(http.StatusInternalServerError)
+		w.WriteHeader(503)
 	}
 
-	templ.Execute(w, data)
+	err = templ.Execute(w, data)
+	if err != nil {
+		w.WriteHeader(503)
+		return
+	}
 }

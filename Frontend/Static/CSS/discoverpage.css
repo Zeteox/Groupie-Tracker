@@ -1,0 +1,175 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+.background {
+    background-image: url("/Static/Images/vinyle_banner1.jpg");
+    background-size: 100vw 20vh;
+    background-repeat: no-repeat;
+    text-align: center;
+}
+
+.logo {
+    margin-top: 0;
+    height: 17vh;
+    width: 10vw;
+}
+.home-button {
+    display : block;
+    position: absolute;
+    color : #000000;
+    background-color: #ffffff;
+    width: 4%;
+    height: 35px;
+    margin-top: 10px;
+    margin-left: 10px;
+    border-radius: 8px;
+}
+
+#searchBar {
+    border-radius: 2vw;
+    position: relative;
+    aspect-ratio: 4/1;
+    width: 17vw;
+    font-size: 1.3vw;
+    padding: 12px 15px 12px 15px;
+    margin-top: 10px;
+    margin-left: 8px;
+    margin-bottom: 10px;
+    border: solid black 0.1vw;
+}
+
+#search-button {
+    position: absolute;
+    background: url("/Static/Images/Search_icon.png"), transparent;
+    background-size: cover;
+    z-index: 100000;
+    top: 3.5vh;
+    left: 15.3vw;
+    height: 3vh;
+    border: none;
+    aspect-ratio: 1/1;
+}
+
+h3 {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+#groups {
+    position: absolute;
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    aspect-ratio: 1/1;
+    width: auto;
+    overflow: auto;
+}
+
+#groups li {
+    display: none;
+}
+
+#groups li a {
+    border: 1px solid #ddd;
+    margin-top: -1px;
+    background-color: #f6f6f6;
+    padding: 12px;
+    text-decoration: none;
+    font-size: 18px;
+    color: black;
+    display: block;
+}
+
+#groups li a:hover:not(.header) {
+    background-color: #eee;
+}
+
+#FiltersForm {
+    position: sticky;
+    z-index: 100;
+    width: inherit;
+    font-size: 1.1vw;
+    font-family: Arial, sans-serif;
+    margin-left: -0.5vw;
+    text-align: center;
+}
+
+select {
+    margin-top: 5px;
+    width: 10vw;
+}
+#filter-button {
+    display : block;
+    position: absolute;
+    color : #000000;
+    background-color: #cac6d0;
+    font-size: 13px;
+    width: 4vw;
+    height: 3vh;
+    margin-top: 5px;
+    margin-left: 10px;
+    border-radius: 5px;
+}
+.career-filter, .album-filter, .member-filter, .concert-location {
+    margin-top: 5px;
+    margin-bottom: 15px;
+    margin-left: 10px;
+}
+
+.images {
+    position: absolute;
+    display: table-row-group;
+    text-align: center;
+    top: 19.6vh;
+    left: 18vw;
+    overflow: scroll;
+    bottom: -17.6vh;
+}
+
+.grpImage {
+    border: solid black 0.2vw;
+    border-radius: 1vw;
+    width: 18vw;
+    aspect-ratio: 1/1;
+    border-spacing: 1vw;
+    margin: 2vh 2vw;
+    &:hover {
+        transform: scale(1.1);
+        transition: transform 0.3s ease;
+    }
+}
+
+#Form {
+    position: sticky;
+    top: 0;
+    width: 19vw;
+    height: 100vh;
+    background-color: #D9D9D9;
+}
+
+.category {
+    font-size: 1.8vw;
+    font-weight: bold;
+    font-family: Arial, "sans-serif";
+}
+
+#selector {
+    width: 13vw;
+    border-radius: 1vw;
+    aspect-ratio: 6/1;
+    font-size: 1.4vw;
+}
+
+#smb_btn {
+    width: 5vw;
+    border-radius: 1vw;
+    border: solid black 0.1vw;
+    font-size: 1.8vw;
+    aspect-ratio: 2/1;
+    &:hover {
+        background-color: darkgrey;
+        transition-duration: 200ms;
+    }
+}
