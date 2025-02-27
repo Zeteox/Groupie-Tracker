@@ -15,7 +15,7 @@
 .logo {
     margin-top: 0;
     height: 17vh;
-    width: 10vw;
+    aspect-ratio: 1/1;
 }
 .home-button {
     display : block;
@@ -208,28 +208,39 @@ select {
         height: 17vh;
     }
     .home-button {
-        width: 6vw;
-        height: 2.5vh;
+        width: 9vw;
+        font-size: 2vw;
     }
     #Form {
         width: 25vw;
     }
+
+    #FiltersForm {
+        font-size: 2vw;
+    }
+
+    .category{
+        font-size: 3vw;
+    }
+
     #searchBar {
         width: 23vw;
-        height: 3vh
+        font-size: 1.9vw;
     }
     #search-button {
         width: 0;
         aspect-ratio: 1/1;
     }
-    select {
-        width: 15vw;
+
+    #selector {
+        width: 20vw;
+        aspect-ratio: 5/1;
+        font-size: 2vw;
     }
+
     #filter-button {
-        width: 6vw;
-        height: 2.7vh;
-        margin-left: 9vw;
-        margin-top: 0.5vh;
+        width: 10vw;
+        font-size: 3vw;
     }
     #MembersNumber {
         width: 12vw;
@@ -247,15 +258,17 @@ select {
         height: 10vh;
     }
     .logo {
-        width: 10vw;
         height: 10vh;
+        aspect-ratio: 1/1   ;
     }
     .home-button {
-        width: 10vw
+        width: 15vw;
+        font-size: 4vw;
     }
     #searchBar {
         width: 26vw;
-        font-size: 8px;
+        aspect-ratio: 8/1;
+        font-size: 3vw;
     }
     #search-button {
         width: 0;
@@ -265,16 +278,29 @@ select {
         top: 11vh;
         margin-left: 10vw;
     }
+
     #Form {
         width: 30vw;
     }
 
-    select {
-        width: 25vw;
-        font-size: 11px;
+    #FiltersForm {
+        width: 30vw;
+        font-size: 3vw;
     }
+
+    .category {
+        font-size: 4vw;
+    }
+
+    #selector {
+        width: 27vw;
+        height: 3vh;
+        font-size: 3vw;
+    }
+
     #filter-button {
-        width: 10vw;
+        width: 20vw;
+        border-radius: 2vw;
     }
 }
 
