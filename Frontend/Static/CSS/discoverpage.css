@@ -193,12 +193,13 @@ select {
     width: 4vw;
     height: 4vh;
     left: 1vw;
+    background-color: darkgrey;
     border-radius: 0.5vw;
     border: solid black 0.15vw;
     font-size: 1.4vw;
     aspect-ratio: 2/1;
     &:hover {
-        background-color: darkgrey;
+        background-color: grey;
         transition-duration: 200ms;
     }
 }
