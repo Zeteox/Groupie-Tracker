@@ -1,8 +1,14 @@
 .background {
     background-image: url("/Static/Images/vinyle_banner1.jpg");
-    width: 100vw;
     margin: 0;
     background-repeat: no-repeat;
+    text-align: center;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
 }
 
 .logo {
@@ -39,14 +45,29 @@
     width: 22vw;
     position: absolute;
     border-radius: 8px;
-    margin-left: 900px;
+    left: 21vw;
+    top: 15vw;
+    box-shadow: 5px 5px 5px grey;
+    border-style: solid;
+    border-color: grey;
+    border-width: 1px;
 }
 
 .description {
-    position: absolute;
-    margin-left: 300px;
     text-align: left;
     width: 100%;
+    height: 135vh;
+}
+
+.bloc1 {
+    position: absolute;
+    right: 39vw;
+}
+
+.bloc2 {
+    position: absolute;
+    right: 19vw;
+    top: 15vw;
 }
 
 footer {
@@ -56,23 +77,31 @@ footer {
     margin: 0;
     text-align: center;
     color: #000000;
-    bottom: 0;
+    bottom: 4vw;
     font-style: italic;
 }
 
 #map {
     position: absolute;
-    top: 98vh;
+    top: 90vh;
     left: 25vw;
     height: 70vh;
     width: 50vw;
-    border: solid black 2px;
+    box-shadow: 5px 5px 5px grey;
+    border-style: solid;
+    border-color: grey;
+    border-width:1px;
+    border-radius: 8px;
 }
 
-@media (max-width: 600px) {
-    .logo {width: 30%; }
-    .backButton {margin-left: 15px; }
-    .albumCover {width: 100%; position: relative; margin-left: 0px}
-    .block1 {width: 100%; text-align: left; }
-    .block2 {width: 100%; text-align: left; }
+@media (max-width: 1100px) {
+    .logo {width: 18%; }
+    .homeButton {width: 8%; }
+    .backButton {left: 5vw; }
+    .albumCover {width: 30%; position: absolute; left: 14vw; top: 30vh}
+    .description {width: 100%; text-align: left; height: 155vh; }
+    .bloc1 {position: relative; left: 50vw; }
+    .bloc2 {position: relative; left: 15vw; top: 3vh; }
+    #map {width: 90%; left: 5vw; top: 110vh; }
+    footer {top: 105vh; }
 }
